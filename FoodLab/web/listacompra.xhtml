@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=4.0, user-scalable=0" />
+
+        <title>Facelets Template</title>
+
+        <h:outputStylesheet library="css" name="listacompra.css"/>
+
+        <h:outputScript library="js" name="jquery-3.3.1.min.js" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+        <h:outputScript library="js" name="galeriaImagenes.js" />
+        <h:outputScript library="js" name="jquery.validate.min.js" />
+        <h:outputScript library="js" name="popper.min.js" />
+
+
+
+    </h:head>
+
+
+    <body>
+
+
+        <ui:decorate template="plantillas/composicion.xhtml">
+
+            <ui:define name="content">
+
+                <ui:decorate template="plantillas/plantilla.xhtml">
+
+                    <ui:define name="content_int">
+
+
+                        <main class="row justify-content-center mb-5">
+
+                            <h1>Lista de la compra</h1>
+
+                            <h:panelGroup rendered="#{!empty listaCompraRespaldo.msj}">
+                                <span class="row col-12 justify-content-center"> <h:outputText value="#{listaCompraRespaldo.msj}" class="alert-info" />
+                                </span>
+                            </h:panelGroup>
+
+                            <h:form>
+                                <h:inputText value="#{listaCompraRespaldo.ctd}" id="ctd"/><h:inputText value="#{listaCompraRespaldo.unidad}" id="unidad"/>
+                                <p:watermark for="ctd" value="Cantidad" /><p:watermark for="unidad" value="Unidad" />
+                                <h:selectOneMenu value="#{listaCompraRespaldo.ing}" >
+                                    <f:selectItems value="#{listaCompraRespaldo.ingredientes}" />
+                                </h:selectOneMenu>
+                                <h:commandButton action="#{listaCompraRespaldo.addLista()}" value="Añadir a la lista" />
+
+                            </h:form>
+
+                            <h:panelGroup rendered="#{empty listaCompraRespaldo.listaCompra}">
+                                <div class="row col-12 justify-content-center ">
+                                    <span>Aún no se ha añadido nada a la lista.</span>
+                                </div>
+                            </h:panelGroup>
+                            <ui:repeat value="#{listaCompraRespaldo.listaCompra}" var="item" >
+
+                                <div class="row col-12 justify-content-center ">
+                                    <span class="row">
+                                        <span><h:outputText value="#{item.cantidad} " /> <h:outputText value="#{item.unidad} " /> <h:outputText value="#{item.ingrediente1.nombre}" /></span>
+                                        <h:form>
+
+                                            <h:commandButton value="X" action="#{listaCompraRespaldo.eliminar(item.listaCompraPK)}" />
+                                        </h:form>
+                                    </span>
+                                </div>
+                            </ui:repeat>
+
+                        </main>
+                    </ui:define>
+                </ui:decorate>
+
+            </ui:define>
+        </ui:decorate>
+
+
+
+
+
+
+    </body>
+
+</html>

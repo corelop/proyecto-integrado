@@ -1,0 +1,501 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02-may-2020, 11:40:11
+    Author     : CRIS
+*/
+
+/**************Plantilla*************/
+@import url(https://weloveiconfonts.com/api/?family=brandico);
+
+/* brandico */
+[class*="brandico-"]:before {
+    font-family: 'brandico', sans-serif;
+    font-size: 2em;
+}
+
+@font-face{
+    src: url(fonts/Boogaloo-Regular.ttf);
+    font-family: 'Boogaloo';
+}
+@font-face{
+    src: url(fonts/GrandHotel-Regular.ttf);
+    font-family: 'GrandHotel';
+}
+
+@font-face{
+    src: url(fonts/AmaticSC-Regular.ttf);
+    font-family: 'Amatic';
+    font-weight: normal;
+}
+
+@font-face{
+    src: url(fonts/AmaticSC-Bold.ttf);
+    font-family: 'Amatic';
+    font-weight: bold;
+}
+
+#descripcion{
+	color: rgba(244,121,147,1.00);
+	
+}
+
+
+
+#contenedor{
+    background-color: #BFF378;
+	min-width: 330px;
+}
+
+header, nav, footer{
+    background-color: white;
+}
+
+header img{
+		max-width: 300px;
+	    width: 100%;
+}
+
+header figcaption{
+    font-family: 'Boogaloo';
+    text-align: center;
+    color: #1C384C;
+	margin-top: -1.5em;
+}
+
+#inicioSesion{
+	text-align: right;
+}
+
+#inicioSesion button{
+    background-color:#F47993;
+    border: 0;
+    color: rgba(249,247,247,1.00);
+    font-weight: bold;
+    font-family: 'Boogaloo';
+    text-transform: uppercase;
+    padding: 1.2em;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    transition: all 0.5s;
+	margin: 0.5em;
+	width: 100%;
+}
+#inicioSesion button:hover{
+    background-color:#F7A2B4;
+    font-weight: normal;
+    cursor: pointer;
+ 
+}
+
+
+
+
+.modal-content{
+    background-color: #FAF5F6;
+    border-radius: 5px;
+}
+
+.modal-header {
+    background-color: #11212d;
+    color: #FAF5F6;
+    font-family: 'Amatic';
+    align-items: center;
+    font-weight: bolder;
+    padding: 0.5em;
+}
+
+.modal-header h5{
+    text-align: center;
+    width: 90%;
+    font-size: 2.5em;
+    letter-spacing: 5px;
+}
+
+.modal-header button{
+    color: #ff9999;
+    font-size: 3em;
+    width: 10%;
+}
+
+.labelInicio{
+    text-align: right;
+    color: #11212d;
+    font-weight: bold;
+     
+}
+
+
+.inputInicio{
+    background-color: white;
+
+    border-radius: 5px;
+    border: 2px solid #1EA97F;
+    transition: all 0.6s;
+}
+
+
+.inputInicio:hover{
+       border: 3px solid #1EA97F;
+}
+
+#register-link p{
+    display: block;
+    color: #333333;
+     margin-top: 1em;
+}
+
+#bRegistro{
+    background: none;
+    border: 0;
+    align-self: center;
+    color: #3399A6;
+    transition: all 0.7s;
+}
+
+#bRegistro:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    font-style: italic;
+}
+
+
+.perfil{
+	display:block;
+	letter-spacing:1px;
+	  width:100%;
+
+}
+
+.perfil:before{
+    position: absolute;
+    right:20%;
+    top:15px;
+}
+
+
+.perfil, .menuDesplegable ul li {
+  cursor:pointer;
+  padding:1em;
+  position:relative;
+  transition:all .4s;
+  -webkit-transition:all .4s;
+	-moz-transition:all .4s;
+}
+
+.perfil:hover, .menuDesplegable ul li:hover {
+ background-color:#c5b1b1;
+    color:#F47993;
+    transition:all .4s;
+    -webkit-transition:all .4s;
+    -moz-transition:all .4s;
+}
+
+.menuDesplegable ul li a{
+	text-decoration: none;
+	color: #b8a7a7;
+	font-family: 'Boogaloo';
+	letter-spacing: 3px;
+}
+
+.menuDesplegable ul li a:hover{
+    color:#F9C4CF;
+    transition:all .4s;
+}
+
+.menuDesplegable ul{
+  opacity:0;
+  padding:0;
+  list-style:none;
+  position:absolute;
+text-align: center;
+	width: 95%;
+	
+}
+
+.perfil, .menuDesplegable ul{
+  background-color:#f2ecec;
+  border-radius:8px;
+  -webkit-border-radius:8px;
+  -moz-border-radius:8px;
+  color:#b8a7a7;
+  box-shadow:0 5px 14px rgba(0, 0, 0, 0.12);
+	z-index: 100;
+}
+
+.menuDesplegable ul:before{
+	content:'';
+    position: absolute;
+    top: -16px;
+    right: 40%;
+    border-style: solid;
+    border-width: 0 14px 16px 14px;
+    border-color: rgba(0, 0, 0, 0) rgba(243, 243, 243, 0) #f2ecec rgba(0, 0, 0, 0);
+}
+
+.menuDesplegable ul li:first-child{
+	 border-radius:8px 8px 0 0;
+}
+
+.menuDesplegable ul li:last-child{
+	    border-radius:0 0 8px 8px;
+}
+
+.menuDesplegable ul li:before{
+    font-weight:100;
+    font-size:22px;
+    position:absolute;
+    top:16px;
+    right:36px;
+}
+
+
+
+.modal-footer{
+    background-color: #BFF378;
+}
+
+.modal-footer *{
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    width: 100%;
+    padding: 0.5em;
+    transition: all 0.7s;
+}
+
+.modal-footer button{
+    background-color: #ff9999;
+}
+
+.modal-footer input{
+    background-color: #1EA97F;
+}
+
+.modal-footer :hover{
+    cursor: pointer;
+    filter: saturate(5);
+    letter-spacing: 5px;
+}
+
+
+nav#menuNav div, nav#menuNav button{
+		margin-bottom: -0.5em;
+}
+
+nav#menuNav a.selected{
+    background-color: #BFF378;
+    color: white;
+}
+
+nav#menuNav a{
+    background-color: #FAF5F6;
+    color: #11212d;
+    font-family: 'GrandHotel';
+    font-size: 1.5em;
+    padding: 0.3em 1em;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+
+nav#menuNav a:hover{
+    color:#F47993;
+    box-shadow:  0px -10px 0px 0px #F47993;
+    text-decoration: none;
+	
+}
+
+nav#menuNav a.disabled{
+    color: #3B5162;
+}
+
+nav#menuNav a.disabled:hover{
+	cursor: default;
+	box-shadow: 0px 0px 0px 0px #F47993;
+}
+
+
+nav#menuNav a:first-of-type{
+    border-top-left-radius: 15px;	
+}
+
+nav#menuNav a:last-child{
+    border-top-right-radius: 15px;	
+}
+
+
+h1,h2,h3{
+    font-family: 'Boogaloo';	
+}
+
+h1{
+background-color: rgba(249,247,247,1.00);
+
+    padding: 0.2em;
+    text-align: center;
+    font-family: 'GrandHotel';
+    letter-spacing: 4px;
+	width: 85%;
+	display: block;
+	margin: 0.5em auto;
+	position: relative;
+}
+
+h1:before {
+   background: linear-gradient(60deg, transparent 33.333%,  rgba(249,247,247,1.00) 33.333%,  rgba(249,247,247,1.00) 66.667%, transparent 66.667%),
+linear-gradient(-60deg, transparent 33.333%,  rgba(249,247,247,1.00) 33.333%,  rgba(249,247,247,1.00) 66.667%, transparent 66.667%);
+	background-size: 45px 20px;
+	content: "";
+	position: absolute;
+	display: block;
+	width: 20px;
+	top: 0;
+	left: -20px;
+	height: 100%;
+}
+
+h1:after {
+   background: linear-gradient(-60deg, transparent 33.333%,  rgba(249,247,247,1.00) 33.333%,  rgba(249,247,247,1.00) 66.667%, transparent 66.667%),
+linear-gradient(60deg, transparent 33.333%,  rgba(249,247,247,1.00) 33.333%,  rgba(249,247,247,1.00) 66.667%, transparent 66.667%);
+	background-size: 45px 20px;
+	content: "";
+	position: absolute;
+	display: block;
+	width: 20px;
+	top: 0;
+	right: -20px;
+	height: 100%;
+	transform: rotateY(180deg);
+}
+
+
+section{
+    margin: 3.5em 0em;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+footer{
+    border-top: 5px solid #369A00;
+	padding: 1em;
+}
+
+footer a{
+    color: rgba(117,223,190,1.00);
+    transition: all 0.5s;
+	margin: 0.2em;
+}
+
+footer a:hover{
+    color: rgba(23,102,78,1.00);
+    text-shadow: 0px 0px 15px rgba(117,223,190,1.00);
+    text-decoration: none;
+}
+
+button:hover{
+    cursor:pointer;
+}
+
+#redes{
+	margin: 2.5em 0;
+}
+
+footer #redes h6{
+	font-family: 'GrandHotel';
+	font-size: 1.6em;
+	
+}
+
+
+#copyright{
+	text-align: right;
+	font-size: 0.8em;
+	font-style: oblique;
+}
+
+
+
+#soporte{
+	font-family: 'Amatic';
+    font-weight: bolder;
+	font-size: 1.5em;
+	letter-spacing: 2px;
+}
+
+#soporte a{
+	margin-top: 0.2em;
+	padding: 0.2em 1.2em ;
+	margin: 0;
+}
+
+#soporte a:first-child{
+	border-right: 2px solid rgba(23,102,78,1.00);
+	margin-left: -1em;
+}
+
+
+ol.breadcrumb{
+    background-color: #CEF599;
+	
+}
+
+
+ol.breadcrumb a{
+   color: rgba(240,115,135,1.00);
+	
+	
+}
+
+#menuNav>button{
+	background-color: rgba(191,243,120,1.00); 
+	width: 100%;
+	
+}
+
+#menuNav>button span{
+	color: rgba(255,255,255,1.00);
+	align-self: center;
+}
+
+@media only screen and (max-width:500px){
+	
+	nav#menuNav a{
+		font-size: 1.1em;
+		padding: 0.5em;
+		width: 100%;
+		border-radius: 0px !important;
+	}
+	
+	nav#menuNav a:hover{
+    box-shadow:  -10px -1px 0px 0px #F47993;
+}
+	
+	figcaption{
+		display: none;
+	}
+	
+	#inicioSesion button{
+		padding: 0.5em;
+		font-size: 0.9em;
+	}
+	
+	h1{
+		width: 95%;
+		font-size: 2em;
+	}
+	
+	section{
+		margin: 1em 0;
+	}
+	
+	footer{
+		align-content: center;
+	}
+
+}
+
+
+

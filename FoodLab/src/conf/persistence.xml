@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="FoodLabPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>DTO.Usuario_1</class>
+    <class>DTO.Ingrediente_1</class>
+    <class>DTO2.Comentario</class>
+    <class>DTO2.Alergeno</class>
+    <class>DTO2.AlergenosIngrediente</class>
+    <class>DTO2.Receta</class>
+    <class>DTO2.Usuario</class>
+    <class>DTO2.IngredientesReceta</class>
+    <class>DTO2.Dieta</class>
+    <class>DTO2.ListaCompra</class>
+    <class>DTO2.Ingrediente</class>
+    <class>DTO.Alergeno</class>
+    <class>DTO.Receta</class>
+    <class>DTO.Usuario</class>
+    <class>DTO.Comentario</class>
+    <class>DTO.Dieta</class>
+    <class>DTO.AlergenosIngrediente</class>
+    <class>DTO.IngredientesReceta</class>
+    <class>DTO.ListaCompra</class>
+    <class>DTO.Ingrediente</class>
+    <class>DTO.SolicitudIngredientes</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/recetas?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="servidores"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="servidores"/>
+    </properties>
+  </persistence-unit>
+</persistence>

@@ -1,0 +1,205 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19-may-2020, 10:12:47
+    Author     : CRIS
+*/
+
+     nav#menuNav a:nth-of-type(3){
+                background-color: #BFF378;
+                color: white;
+            }
+
+section{
+	box-sizing: border-box;
+}
+
+#nuevaReceta{
+	background-color: rgba(17,33,45,1.00);
+	color: rgba(250,245,246,1.00);
+	font-size: 2em;
+	letter-spacing: 3px;
+	font-weight: bold;
+	font-family: 'Amatic';
+	text-align: center;
+	text-transform: uppercase;
+	border-radius: 10px;
+	transition: all ease 2.5s;
+	position: relative;
+	display: block;
+	padding: 0.2em;
+	margin-bottom: 2em;
+	
+}
+
+
+#nuevaReceta:after,
+#nuevaReceta:before{
+	width: 70px;
+	height: 170px;
+	content: '';
+	display: block;
+	background: transparent;
+	transform: rotate(45deg);
+	top: -50px;
+	position: absolute;
+	right:-45%;
+	cursor: pointer;
+}
+
+#nuevaReceta:before{
+	left: -45%;
+}
+
+#nuevaReceta:hover{
+	text-shadow: 0 0 50px #F47993;
+	border: 2px solid rgba(250,245,246,1.00);
+}
+
+#nuevaReceta:hover:after,
+#nuevaReceta:hover:before{
+	background: rgba(191,243,120,1.00);
+	transition: all ease 2.5s;
+}
+
+#nuevaReceta:hover:after{
+	right: 130%;
+}
+
+#nuevaReceta:hover:before{
+	left: 130%;
+}
+
+
+#recetasFav, #recetasSubidas{
+	border: 2px solid rgba(244,121,147,1.00);
+	background-color: rgba(244,121,147,0.1);
+	padding: 0;
+	border-top: 0;
+}
+
+
+
+#recetasFav>div, #recetasSubidas>div{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0.5em;
+	margin-top: 2em;
+}
+
+#recetasFav .card, #recetasSubidas .card{
+	width: 50%;
+	
+}
+
+#recetasFav .card img, #recetasSubidas .card img{
+	height: 25vh;
+}
+
+
+#recetasFav .card-body, #recetasSubidas .card-body{
+	width: 100%;
+	position: absolute;
+	height: 25vh;
+	overflow: hidden;
+}
+
+#recetasFav .card h5 , #recetasSubidas .card h5{
+	font-family: 'Boogaloo';
+	font-size: 1.5em;
+	text-align: center;
+	background-color: rgba(250,245,246,0.5);
+	padding: 0.5em;
+	border-radius: 10px;
+	margin-top: 2.2em;
+	transition: 0.5s all;
+}
+#recetasFav .card span, #recetasSubidas .card span{
+	float: right;
+	display: block;
+	border-radius: 100%;
+	text-shadow: 0px 0px 20px rgba(191,243,120,0.95);
+	padding: 0.2em;
+	font-style: italic;
+	color: rgba(250,245,246,1);
+	opacity: 0;
+	transition: 0.5s all;
+}
+
+#recetasFav input, #recetasSubidas input{
+	position: absolute; 
+	bottom: 10px;
+	width: 90%;
+	display: block;
+	margin: auto;
+	border-radius: 5px;
+	color: rgba(250,245,246,1);
+	border: 0;
+	padding: 0.2em;
+	text-transform: uppercase;
+	background-color: rgba(244,121,147,1.00);
+	font-size: 0.8em;
+	font-weight: bold;
+	letter-spacing: 7px;
+	transition: 0.5s all;
+	opacity: 0;
+}
+
+#recetasFav input:hover, #recetasSubidas input:hover{
+	cursor: pointer;
+	background-color: rgba(244,121,147,0.7);
+}
+
+#recetasFav .card:hover input, #recetasFav .card:hover span, #recetasSubidas .card:hover input, #recetasSubidas .card:hover span{
+	opacity: 1;
+}
+
+#recetasFav .card:hover h5, #recetasSubidas .card:hover h5{
+	margin-top: 0;
+}
+
+
+h2{
+	text-align: center;
+	background-color:  rgba(244,121,147,1.00);
+	color: rgba(250,245,246,1.00) !important;
+	padding: 0.2em;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	top: -0.5em;
+	right: -0.1em;
+	left: -0.1em;
+	position: absolute;
+}
+
+.estadoSolicitud{
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-weight: bolder;
+	padding: 0.5em;
+}
+
+
+.aceptada{
+	background-color: rgba(6,79,5,0.66);
+	color: rgba(6,79,5,1);
+}
+.no-aceptada{
+	background-color: rgba(79,4,4,0.66);
+	color: rgba(79,4,4,1)
+}
+
+@media only screen and (max-width:500px){
+	
+	#recetasFav .card, #recetasSubidas .card{
+	width: 100%;
+	
+}
+
+	
+}

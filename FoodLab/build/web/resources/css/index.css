@@ -1,0 +1,483 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02-may-2020, 11:40:20
+    Author     : CRIS
+*/
+
+nav#menuNav a:first-of-type{
+                background-color: #BFF378;
+                color: white;
+            }
+
+
+
+.barraBusqueda{
+    box-sizing: content-box;
+    margin-top: 2em;
+}
+
+.barraBusqueda *{
+    background-color: #FAF5F6;
+    border: 0;
+    padding: 0.4em;
+    border-radius: 15px;
+    transition: all 0.8s;
+	
+}
+
+.barraBusqueda input[type="text"], .barraBusqueda select{
+    width: 93%;
+    border-bottom-right-radius: 0; 
+    border-top-right-radius: 0; 
+    border-right: 0 !important;
+}
+
+.barraBusqueda input[type="image"]{
+    width: 50px;
+    margin-left: -2px;
+    border-bottom-left-radius: 0; 
+    border-top-left-radius: 0; 
+    border-left: 0 !important;
+}
+
+
+.barraBusqueda:hover > *{
+    border: 1px solid #1EA97F;
+}
+
+.barraBusqueda input[type="text"]:focus, .barraBusqueda input[type="search"]:focus + input{
+    border: 2px solid #1EA97F;
+}
+
+.barraBusqueda input[type="image"]:hover{
+    filter: grayscale(100);
+}
+
+#barraBusquedaI, #barraBusquedaD{
+	display: none;
+}
+
+.rBusqueda{
+    padding: 0.5em;
+}
+
+.ui-chips{
+	width: 90%;
+}
+
+.ui-chips-container{
+	width: 100% !important;
+    padding: 0.1em;
+    border-radius: 15px;
+    transition: all 0.8s;
+}
+
+.ui-chips *{
+	background-color: #FAF5F6 !important;
+	 border: 0 !important;
+}
+
+.ui-chips-token-label{
+	background-color: rgba(244,121,147,1.00) !important;
+	color: white !important;
+}
+
+#barraBusquedaI input[type="image"] {
+	align-self: center;
+	
+}
+
+input[type="radio"] + label:before {
+    content: "";
+    width: 23px;
+    height: 23px;
+    float: left;
+    border: 2px solid #3399A6;
+    background: #FAF5F6;
+    border-radius: 100%;
+    margin-right: 0.3em;
+}
+
+input[type="radio"]:checked + label:after {
+    content: "";
+    width: 0;
+    height: 0;
+    float: left;
+    border: 6px solid #87D0DA;
+    border-radius: 100%;
+    margin-left: -1.4em;
+    margin-top: 0.35em;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+#ultimasAdd{
+    background-color: white;
+    border-radius: 10px;
+    padding: 2em 0;
+    box-sizing: border-box;
+    border: 15px solid #F47993;
+	width: 100%;
+	margin: auto;
+	max-width: 1200px;
+}
+
+
+#ultimasAdd button{
+    border: 0;
+    transition: all 0.6s;
+	background-color: rgba(244,121,147,1.00);
+	align-self: stretch;
+	margin: 0;
+	padding: 0;
+	transform: scaleY(1.35);
+	margin-top: 3.1em;
+	
+}
+
+
+#ultimasAdd button:hover{
+    cursor: pointer;
+	transform: scale(1.35);
+}
+
+#prev{
+    background: url(../img/prev.png) no-repeat center;
+    background-size: 3em 2.5em;
+	border-bottom-right-radius: 20%;
+	border-top-right-radius: 20%;
+	border-bottom-left-radius: 0%;
+	border-top-left-radius: 0%;
+}
+
+
+
+#next{
+    background: url(../img/next.png)  no-repeat center;
+    background-size: 3em 2.5em;
+	border-bottom-left-radius: 20%;
+	border-top-left-radius: 20%;
+	border-bottom-right-radius: 0%;
+	border-top-right-radius: 0%;
+
+}
+
+
+#diapositivas{
+    list-style: none;
+   
+    display: block;
+    z-index: 0;
+    max-width: 800px;
+    position: relative;
+}
+
+#diapositivas input[type="image"]{
+    width: 100%;
+    border-radius: 10px;
+    height: 60vh; 
+}
+
+
+
+#miniaturas{
+	
+}
+
+#miniaturas ul{
+	justify-content:  center;
+}
+
+#miniaturas ul li{
+	border: 3px solid #28333E;
+	background-color:  #8895A3;
+	list-style: none;
+	color: transparent;
+	padding: 0.2em 2.8em;
+	margin: 0.2em;
+	transition: all 0.2s;
+	border-radius: 5px;
+}
+
+#miniaturas ul li img{
+	display: none;
+}
+
+#miniaturas ul li:hover{
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+#miniaturas ul li.seleccionada {
+	border: 3px solid #66CFAF;
+	background-color: rgba(131,238,205,1.00);
+}
+
+
+
+#diapositivas:before{
+    content: "";
+    left: 25px;
+    bottom: 10px;
+    box-shadow: 0 15px 14px rgba(0, 0, 0, 0.9);
+    transform: rotate(-2deg);
+    position: absolute;
+    z-index: -1;
+    width: 60%;
+    height: 95%;
+    border-radius: 10px;
+ 
+}
+
+#diapositivas:after{
+    content: "";
+    right: 25px;
+    bottom: 10px;
+    box-shadow: 0 15px 14px rgba(0, 0, 0, 0.8);
+    transform: rotate(2deg);
+    position: absolute;
+    z-index: -1;
+    width: 60%;
+    height: 95%;
+    border-radius: 10px;
+   
+}
+
+
+#rotulo{
+    background: rgba(17,33,45, 0.88);		
+    color: aliceblue;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    bottom: 1em;
+    text-align: right;
+    max-width: 800px;
+    position: absolute;
+    right: 1em;
+    left: 1em;
+}
+
+#diapositivas h3{	
+    text-align: left;
+
+}
+
+#diapositivas span{	
+    margin-top: -1.2em;
+    font-size: 0.8em;
+    font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
+    display: block;
+}
+
+
+#categorias{
+    border: 6px solid white;
+	width: 100%;
+	font-family: 'Boogaloo';
+	
+	background-color: #66CFAF;
+}
+
+#categorias div{
+   width: 20%;
+}
+
+#categorias div input{
+	color:#F7FCFA;
+    font-weight: bold;
+    padding: 2em 1em;
+    transition: all 1.2s;
+    text-align: center;
+	background-color: #85D9BF;
+	border: 0;
+	text-transform: uppercase;
+	font-size: 1.8em;
+	letter-spacing: 2px;
+	width: 100%;
+}
+
+#categorias div input:hover{
+    cursor: pointer;
+    color: #C0EBDE;
+	background-color: rgba(244,121,147,1.00);
+	text-shadow: 0px 0px 30px  #F0FAF7;
+	
+}
+
+section{
+	margin:0;
+}
+
+
+#resultadoRecetas div{
+	width: 20%;
+}
+
+#resultadoRecetas div img{
+	height: 25vh;
+}
+
+
+#resultadoRecetas .card-body{
+	width: 100%;
+	position: absolute;
+	height: 25vh;
+	overflow: hidden;
+}
+
+#resultadoRecetas div h5{
+	font-family: 'Boogaloo';
+	font-size: 1.5em;
+	text-align: center;
+	background-color: rgba(250,245,246,0.5);
+	padding: 0.5em;
+	border-radius: 10px;
+	margin-top: 2.2em;
+	transition: 0.5s all;
+}
+#resultadoRecetas div span{
+	float: right;
+	display: block;
+	border-radius: 100%;
+	text-shadow: 0px 0px 20px rgba(191,243,120,0.95);
+	padding: 0.2em;
+	font-style: italic;
+	color: rgba(250,245,246,1);
+	opacity: 0;
+	transition: 0.5s all;
+}
+
+#resultadoRecetas input{
+	position: absolute; 
+	bottom: 10px;
+	width: 90%;
+	display: block;
+	margin: auto;
+	border-radius: 5px;
+	color: rgba(250,245,246,1);
+	border: 0;
+	padding: 0.2em;
+	text-transform: uppercase;
+	background-color: rgba(244,121,147,1.00);
+	font-size: 0.8em;
+	font-weight: bold;
+	letter-spacing: 7px;
+	transition: 0.5s all;
+	opacity: 0;
+}
+
+#resultadoRecetas input:hover{
+	cursor: pointer;
+	background-color: rgba(244,121,147,0.7);
+}
+
+#resultadoRecetas div:hover input, #resultadoRecetas div:hover span{
+	opacity: 1;
+}
+
+#resultadoRecetas div:hover h5{
+	margin-top: 0;
+}
+
+@media only screen and (max-width:1300px){
+	#descripcion{
+		display: none;
+	}
+}
+
+@media only screen and (max-width:850px){
+		
+	#categorias div input{
+		font-size: 1.2em;
+		padding: 1.8em 1.2em;
+	}
+	
+	.barraBusqueda input[type="text"], .barraBusqueda select{
+    	width: 80%;
+}
+	
+	main{
+		margin-bottom: 1em !important;
+	}
+	
+	#resultadoRecetas div{
+	width: 30vw;
+		height: 20vw;
+    }
+	
+	#miniaturas ul li{
+	padding: 0.2em 2em;
+
+}
+
+
+	
+}
+
+
+@media only screen and (max-width:500px){
+	
+	#cont-barra{
+		margin-left: 1em;
+	}
+	
+	.barraBusqueda input[type="text"], .barraBusqueda select{
+    	width: 85%;
+}
+	
+	#diapositivas input[type="image"]{
+		height: 35vh;
+	}
+	
+	#miniaturas ul li{
+		padding: 0.2em 0.7em;
+		border-radius: 30px;
+		
+	}
+	
+	#ultimasAdd{
+		padding: 1em 0;
+	}
+	
+	
+#ultimasAdd button{
+ 
+	transform: scaleY(1.6);
+	 background-size: 1.8em 1.2em;
+	
+}
+	#ultimasAdd button:hover{
+
+	transform: scale(1.6);
+}
+	
+	#rotulo h3{
+		font-size: 1.5em;
+		margin-bottom: 1em;
+	}
+	
+	#categorias div{
+   width: 100%;
+}
+	
+	#categorias div input{
+		font-size: 1.5em;
+		padding: 1em;
+	}
+	
+	#resultadoRecetas div{
+		width: 50%;
+	}
+	
+}
+
+
+
+
+ 

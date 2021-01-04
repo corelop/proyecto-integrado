@@ -1,0 +1,571 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07-may-2020, 11:12:23
+    Author     : CRIS
+*/
+
+#subidoEL{
+	text-align: right;
+}
+
+#arreglar{
+	position: relative;
+	width: 5em;
+}
+
+#arreglar form{
+	top: 0;
+	position: absolute;
+	left: 1.5em
+}
+
+section{
+	margin: 2vh 0;
+}
+
+.info-receta{
+	background-color: #11212D;
+	color: aliceblue;
+	padding: 1em;
+}
+
+.contenedor-img img{
+	width: 90%;
+	max-width: 1000px;
+	min-width: 250px;
+	border-radius: 10px;
+}
+
+.alergenos{
+	margin-bottom: 2.5em;
+}
+
+
+.alergenos button{
+	padding: 1.2em;
+	background-color: transparent;
+	background-size: contain;
+	background-position: center;
+	border: 0;
+	border-radius: 100%;
+	transition: all 1s;
+}
+
+.alergenos button:hover{
+	cursor: url(../../img/caution.png), auto;
+	box-shadow: 0 0 1000px 50px white;
+}
+
+
+.info-receta label{
+	font-size: 1.2em;
+	font-family: 'Boogaloo';
+	letter-spacing: 2px;
+}
+
+.info-receta label img{
+	border-radius: 100%;
+	width: 2em;
+}
+
+
+
+#guardarReceta input[type="submit"]{
+	background: url(../../img/megusta-noselected.png) no-repeat center;
+	background-size: cover;
+	padding: 2em;
+	border: 0;
+	transition: all 1s;
+}
+
+
+#borrarReceta input[type="submit"]{
+	background: url(../../img/megusta-selected.png) no-repeat center;
+	background-size: cover;
+	padding: 2em;
+	border: 0;
+	transition: all 1s;
+}
+
+#guardarReceta input[type="submit"]:hover{
+	background-image: url(../../img/megusta-selected.png);
+transition: all 1s;
+	cursor: pointer;
+}
+
+#borrarReceta input[type="submit"]:hover{
+	background-image: url(../../img/megusta-noselected.png);
+transition: all 1s;
+	cursor: pointer;
+}
+
+.pie-foto{
+	padding: 1em;
+	align-items: center;
+
+}
+
+.pie-foto span{
+	letter-spacing: 2px;
+	font-size: 1.5em;
+	font-family: 'Amatic';
+    font-weight: bold;
+	position: absolute;
+	top: 1.8em;
+	left: 3.5em;
+}
+
+.pie-foto p{
+	font-style: italic;
+	margin: -1em;
+}
+
+article {
+  width: 90%;
+	position: relative;
+}
+
+.ingredientes:before{
+	content: "";
+	border-left: 2px solid rgba(17,33,45,0.77);
+	border-right: 2px solid rgba(17,33,45,0.6);
+	left: -1em;
+	right: -1em;
+	top: -2em;
+	bottom: -2em;
+	position: absolute;
+	
+}
+
+.ingredientes:after{
+	content: "";
+	border-top: 2px solid rgba(17,33,45,0.6);
+	border-bottom: 2px solid rgba(17,33,45,0.77);
+	left: -1.5em;
+	right: -1.5em;
+	top: -1em;
+	bottom: -1em;
+	position: absolute;
+}
+
+.ingredientes{
+	padding: 1em 1em 3em;
+	background-color: rgba(205,245,150,1.00);
+	margin-top: -2em;
+	margin-bottom: 2em;
+}
+
+#cal{
+	color:rgba(187,155,88,1.00);
+}
+
+tr{
+	text-indent: 1.5em;
+	font-size: 1em;
+	font-weight: lighter;
+}
+
+tr:before{
+	content: "-";
+}
+
+article p{
+	padding: 1em;
+	background-color: rgba(205,245,150,1.00);
+	border-radius: 5px;
+}
+
+article{
+	margin-top: 3em;
+}
+
+.comentario{
+	background-color: rgba(250,245,246,1.00);
+	padding: 1em;
+	border-radius: 5px;
+	position: relative;
+	margin: 0.5em;
+}
+
+.comentario span{
+	position: absolute;
+	top: 0.5em;
+	right: 0.5em;
+	margin: 1em;
+	font-size: 0.8em;
+	font-style: italic;
+}
+
+.comentario span:nth-child(2){
+	top: 3.5em;
+	font-size: 1em;
+	font-style: normal;
+	right: 0;
+}
+
+.comentario img{
+	width: 1.5em;
+}
+
+.comentario h5{
+	border-bottom: 1.5px solid rgba(35,159,120,1.00);
+	padding-bottom: 0.3em;
+	color: rgba(35,159,120,1.00);
+	margin-bottom: 1.2em;
+}
+
+
+#formComentario{
+	border: 2px solid rgba(54,154,0,0.8);
+	display: flex;
+	flex-flow: column;
+	padding: 0;
+	margin-bottom: 2em;
+}
+
+
+#formComentario h6{
+	background-color: rgba(54,154,0,0.8);
+	padding: 0.5em;
+	color:rgba(250,245,246,1.00);
+	letter-spacing: 3px;
+	text-transform: uppercase;
+}
+
+#formComentario form{
+	display: flex;
+	flex-flow: column;
+}
+
+#formComentario form input[type="submit"]{
+	background-color: rgba(247,162,180,1.00);
+	padding: 0.5em;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	border:0;
+	color: rgba(250,245,246,1.00);
+	font-weight: bold;
+	font-size: 0.8em;
+	margin-top: 0.5em;
+	transition: all 0.8s;
+}
+
+#formComentario form input[type="submit"]:hover{
+	cursor: pointer;
+	background-color: rgba(240,89,121,1.00);
+}
+
+.ingredientes ul{
+	list-style: none;
+	margin-top: 2em;
+}
+
+
+.ingredientes li{
+	margin: 0.5em;
+	background-color: #F47993;
+	padding: 0.2em;
+	position: relative;
+	text-indent: 1.5em;
+	color:aliceblue;
+	font-size: 1.2em;
+}
+
+.ingredientes li:before, .ingredientes td label:before{
+	content: "";
+	background-color: #F47993;
+	padding: 0.3em 1em;
+	border-radius: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -1em;
+}
+
+.ingredientes li:after, .ingredientes td:after{
+	content: "";
+	background-color: #C8E1F0;
+	padding: 0.1em 0.8em;
+	border-radius: 100%;
+	position: absolute;
+	top: 0.2em;
+	bottom: 0.2em;
+	left: -0.7em;
+}
+
+.ingredientes tr *{
+	transition: all 0.7s;
+}
+
+.ingredientes tr:before{
+	display: none;
+}
+.ingredientes td{
+	width: 100%;
+	display: block;
+	z-index: 100;
+	margin: 0.5em;
+	background-color: #F47993;
+	padding: 0.1em 20em 0.1em 0.2em;
+	position: relative;
+	text-indent: 1.5em;
+	color:aliceblue;
+	font-size: 1.2em;
+	
+}
+
+.ingredientes ul{
+	z-index: 0;
+}
+
+.ingredientes input[type="checkbox"]{
+	display: none;
+}
+
+
+.ingredientes form{
+	z-index: 1;
+	position: relative;
+}
+
+
+.ingredientes input[type="checkbox"]:checked + label:before{
+	content: "";
+	background: #1A4661 url(../../img/tick.png) center;
+	background-size: cover;
+	padding: 0em 0.8em;
+	position: absolute;
+	top: 0.2em;
+	bottom: 0.2em;
+	left: -0.7em;
+	z-index: 1;
+	border-radius: 5px;
+}
+
+.ingredientes input[type="submit"]{
+	position: absolute;
+	background-color: #1A4661;
+	padding: 0.5em 1.5em; 
+	border-radius: 5px;
+	border: 0;
+	color: rgba(200,225,240,1.00);
+	font-family: 'Boogaloo';
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	bottom: -3em;
+	width: 90%;
+	transition: all 0.5s;
+	display: none;
+}
+
+
+.ingredientes input[type="submit"]:hover{
+	cursor: pointer;
+	background-color:#0C212D;
+	border-radius: 15px;
+	letter-spacing: 2px;
+	z-index: 999999;
+}
+
+#botones{
+	border: 10px solid rgba(205,245,150,1.00);
+	border-radius: 15px;
+	
+	padding: 0.2em;
+	width: 90% !important;
+	box-sizing: border-box;
+}
+
+.boton{
+	padding: 1em;
+	text-align: center;
+}
+
+.boton h6{
+	font-family: 'Amatic';
+	font-size: 1.6em;
+	text-align: center;
+	font-weight: bolder;
+}
+
+.boton input[type="text"]{
+	font-weight: normal;
+	background-color: rgba(215,238,255,1.00);
+	border: 1px solid rgba(205,245,150,1.00); 
+	padding: 0.2em;
+	border-radius: 5px;
+
+}
+
+.boton input[type="image"]{
+	width: 20%;
+	margin: auto;
+	display: block;
+	transition: all 0.5s;
+}
+
+.boton input[type="image"]:hover{
+	transform: scale(1.2);
+	filter: blur(50);
+}
+
+#mensaje{
+	background-color: rgba(252,247,230,1.00);
+	border: 8px solid rgba(244,121,147,1.00);
+	border-top: 0px;
+	border-bottom: 0px;
+	padding: 0.5em 3em;
+	border-radius: 5px;
+    color: rgba(244,121,147,1.00);
+	font-weight: bold;
+	width: 90%;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+
+@media only screen and (max-width:500px){
+	.ingredientes{
+		margin-top: 1em;
+		padding: 1em 0.5em 3em;
+	}
+	
+	.ingredientes td{
+		padding: 0.2em !important;
+		font-size: 0.9em;
+	}
+	
+	.ingredientes input[type="submit"]{
+		width: 100%;
+	}
+	
+	.comentario span:nth-child(2){
+		margin-top: -0.5em;
+	}
+	
+	.comentario div{
+		margin-top:  2.5em;
+	}
+	
+}
+
+
+@media print{
+	header #inicioSesion{
+		display: none;
+	}
+	
+	header {
+		align-content: flex-end;
+		
+	}
+	
+	header figure{
+		float: right;
+		filter: grayscale(100);
+	}
+	
+	header{
+		border-bottom: 1px solid grey;
+	}
+	
+	*{
+		background-color: white !important;
+	}
+	
+	h1{
+		margin-top: -5em;
+	}
+	
+	h1:before, h1:after{
+		display: none !important;
+	}
+	
+	ol{
+		display: none !important;
+	}
+	
+	#descripcion{
+	display: none;
+	
+}
+
+	
+	.datos-receta{
+		
+		color: black;
+	
+	}
+	
+	section{
+		margin: 0.2em;
+	}
+	
+	.contenedor-img{
+
+		filter: grayscale(100);
+	}
+	
+	.pie-foto > div{
+		display: none;
+	}
+	
+	.pie-foto{
+		justify-content: flex-end;
+		color: grey;
+	}
+	
+	.pie-foto p{
+		margin-left: 5em;
+	}
+	
+	.ingredientes{
+		color: black !important;
+		margin-top: -3em;
+		padding: 0;
+	}
+	
+	.ingredientes ul li {
+		list-style: square;
+		color: black;
+		padding: 0;
+	}
+	
+	.ingredientes td{
+		color: black;
+	}
+
+	article:last-of-type, footer{
+		display: none !important;
+	}
+	
+	label img{
+		filter: grayscale(100);
+		width: 1.2em !important;
+	}
+	
+	.ingredientes li:before, .ingredientes td label:before{
+	display: none;
+}
+
+.ingredientes li:after, .ingredientes td:after{
+	content: "";
+	background-color: #090A0A;
+	padding: 0.1em 0.4em;
+	border-radius: 100%;
+	position: absolute;
+	top: 0.6em;
+	bottom: 0.6em;
+	left: -0.2em;
+}
+	
+	#botones{
+		display: none;
+	}
+	
+}
+

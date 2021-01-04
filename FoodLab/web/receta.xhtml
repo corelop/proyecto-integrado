@@ -1,0 +1,260 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=4.0, user-scalable=0" />
+
+        <title>Facelets Template</title>
+
+        <h:outputStylesheet name="./css/receta.css"/>
+
+        <h:outputScript library="js" name="jquery-3.3.1.min.js" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+        <h:outputScript library="js" name="galeriaImagenes.js" />
+        <h:outputScript library="js" name="jquery.validate.min.js" />
+        <h:outputScript library="js" name="popper.min.js" />
+
+        <script>
+
+            $(function () {
+
+                $("input[type='checkbox']").change(function () {
+                    if ($("input[type='checkbox']").is(":checked")) {
+                        $(".ingredientes input[type='submit']").fadeIn();
+                    }
+                });
+
+            });
+
+        </script>
+
+    </h:head>
+
+
+    <h:body>
+
+        <ui:decorate template="plantillas/composicion.xhtml">
+            <ui:define name="content">
+                <ui:decorate template="plantillas/plantilla.xhtml">
+                    <ui:define name="content_int">
+
+                        <main class="row justify-content-center mb-5">
+
+                            <ol class="breadcrumb col-12">
+                                <li class="breadcrumb-item">
+                                    <h:form>
+                                        <h:commandLink action="#{inicioRespaldo.volverInicio()}" >Inicio</h:commandLink> 
+                                    </h:form> 
+                                </li>
+                                <li class="breadcrumb-item" id="arreglar">
+                                    <h:form>
+                                        <h:commandLink action="explorar" >Explorar</h:commandLink> 
+                                    </h:form> 
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">#{recetaRespaldo.receta.nombre}</li>
+                            </ol>
+
+                            <h:panelGroup rendered="#{!empty recetaRespaldo.msj}">
+                                <span id="mensaje"><h:outputText value="#{recetaRespaldo.msj}" /></span>
+                            </h:panelGroup>
+
+                            <section class="row justify-content-center col-12 col-xl-10">
+
+
+                                <h1>&mdash;  <h:outputText value="#{recetaRespaldo.receta.nombre}" /> &mdash;</h1>
+                                <div class="info-receta row align-content-center">
+
+                                    <div class="contenedor-img col-12 col-md-8">
+                                        <img src="img/recetas/#{recetaRespaldo.receta.foto}" />
+                                    </div>
+
+                                    <div class="datos-receta col-12 col-md-4 row flex-column align-content-center ">
+
+                                        <div class="alergenos align-self-end ">
+                                            <ui:repeat var="alergeno" value="#{recetaRespaldo.cargaAlergenos()}" >
+
+                                                <button type="button" style="background-image: url(img/iconos_alerg/#{alergeno.icono})" data-toggle="tooltip" data-placement="bottom" title="#{alergeno.descripcion}">
+                                                </button>
+
+                                            </ui:repeat>
+
+                                        </div>
+
+                                        <label><i>Tipo de plato: </i> <h:outputText value="#{recetaRespaldo.receta.tipoPlato}"></h:outputText></label>
+                                        <label><i>Dieta: </i> 
+                                            <h:dataTable value="#{recetaRespaldo.receta.dietaList}" var="dieta">
+                                                <h:column><h:outputText value="#{dieta.tipo}" /></h:column>
+                                            </h:dataTable>
+
+                                        </label>
+                                        <label><i>Dificultad: </i><h:outputText value="#{recetaRespaldo.receta.dificultad}"></h:outputText></label>
+                                        <label><i>Valoración: </i>
+
+                                            <ui:repeat value="#{recetaRespaldo.obtenerValoracion()}" var="i">
+                                                <h:panelGroup rendered="#{i == '0' or i == '1' or i=='2'}">
+                                                    <h:graphicImage value="img/#{i}.png" />
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{i != '0' and i != '1' and i!='2'}">
+                                                    <h:outputText value="#{i}"/>
+                                                </h:panelGroup>
+                                            </ui:repeat>             
+                                        </label>
+                                        <label id="cal"><i><h:outputText value="#{recetaRespaldo.cal}" /> </i></label>
+                                    </div>
+
+
+                                    <div class="pie-foto col-12 row justify-content-between flex-sm-column flex-md-row">
+                                        <div >
+                                            <h:panelGroup rendered="#{!empty loginRespaldo.usuarioLogueado}">
+
+
+                                                <h:form rendered="#{!recetaRespaldo.recetaFav}">
+                                                    <div id="guardarReceta">
+                                                        <h:commandButton id="bGuardarReceta" action="#{recetaRespaldo.guardarReceta()}" /><span>Guardar receta</span>
+                                                    </div>
+                                                </h:form>
+
+                                                <h:form rendered="#{recetaRespaldo.recetaFav}">
+                                                    <div id="borrarReceta">
+                                                        <h:commandButton id="bGuardarReceta2" action="#{recetaRespaldo.guardarReceta2()}" /><span>Receta guardada</span>
+                                                    </div>
+                                                </h:form>
+
+                                            </h:panelGroup>
+                                        </div>
+                                        <p class="col-12 col-md-6" id="subidoEL">Subido el <h:outputText value="#{recetaRespaldo.receta.fechaInsercion}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:outputText> 
+                                            por <h:outputText value="#{recetaRespaldo.receta.autor.nick}" /></p>
+                                    </div>
+                                </div>
+
+
+                            </section>
+
+
+                            <section class="row justify-content-center col-12">
+
+                                <article class="ingredientes col-10 ">
+
+                                    <h3>Ingredientes</h3>
+
+                                    <div>
+                                        <ul>
+                                            <h:panelGroup rendered="#{empty loginRespaldo.usuarioLogueado}">
+                                                <ui:repeat value="#{recetaRespaldo.receta.ingredientesRecetaList}" var="ir" > 
+                                                    <li><span><h:outputText value="#{ir.cantidad}" /></span> <span><h:outputText value="#{ir.unidadMedida}" /></span> <span><h:outputText value="#{ir.ingrediente1.nombre}" /></span></li>
+                                                </ui:repeat>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup rendered="#{!empty loginRespaldo.usuarioLogueado}">
+                                                <h:form id="formIng">
+                                                    <h:selectManyCheckbox value="#{recetaRespaldo.listaCompra}" >
+                                                        <f:selectItems value="#{recetaRespaldo.ingredientesReceta}" />
+                                                    </h:selectManyCheckbox>
+                                                    <h:commandButton action="#{recetaRespaldo.addLista()}" value="Añadir a mi lista de la compra" id="addLista"/>
+                                                </h:form>
+                                            </h:panelGroup>
+                                        </ul>
+                                    </div>
+                                </article>
+
+
+                                <article>
+
+                                    <h3>Preparación</h3>
+
+                                    <ui:repeat value="#{recetaRespaldo.obtenerParrafos()}" var="p" >
+                                        <h:panelGroup rendered="#{!empty p}">
+                                            <p> <h:outputText value="#{p}"  /></p>
+                                        </h:panelGroup>
+                                    </ui:repeat>
+                                </article>
+
+                                <h:panelGroup rendered="#{!empty loginRespaldo.usuarioLogueado}"> 
+                                    <div id="botones" class="row  justify-content-center">
+
+                                        <h:form class="row justify-content-between col-12 col-md-10">
+                                            <div class="boton col-6">
+                                                <h6>Enviar receta por email:</h6>
+                                                <p:inputText value="#{recetaRespaldo.mail}" />
+
+                                                <h:commandButton image="img/enviar_mail.png" value="Enviar por mail" action="#{recetaRespaldo.mail()}"/>
+                                            </div>
+                                            <div class="boton col-6">
+                                                <h6>Guardar receta como PDF: </h6>
+                                                <h:commandButton image="img/pdf.png"  value="Guardar como PDF" action="#{recetaRespaldo.pdf()}"/>  
+                                            </div>
+
+                                        </h:form>
+
+                                    </div>
+                                </h:panelGroup>
+                                <article>
+                                    <h3>Comentarios</h3>
+
+                                    <h:panelGroup rendered="#{!empty loginRespaldo.usuarioLogueado}">
+                                        <div class="comentario" id="formComentario">
+                                            <h6>Escribir comentario</h6>
+                                            <h:form>
+                                                <h:inputTextarea value="#{recetaRespaldo.comentario.comentario}" id="comentario">
+
+                                                </h:inputTextarea>
+                                                <p:watermark for="comentario" value="Escribe aquí..." />
+                                                <h:outputLabel value="Valoración: " />
+                                                <p:rating stars="10" value="#{recetaRespaldo.comentario.puntuacion}" />
+
+                                                <h:commandButton action="#{recetaRespaldo.addComentario()}" value="Enviar"/>
+                                            </h:form>
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{empty loginRespaldo.usuarioLogueado}">
+                                        <div class="comentario align-content-center justify-content-center" id="formComentario">
+                                            <h6 >Inicia sesión para dejar comentarios.</h6>
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <ui:repeat value="#{recetaRespaldo.receta.comentarioList}" var="c" >
+
+                                        <div class="comentario">
+                                            <h5><h:outputText value="#{c.usuario1.nick}" /></h5>
+                                            <span><h:outputText value="Valoración: " />
+                                                <ui:repeat value="#{recetaRespaldo.calculoEstrellas(c.puntuacion, 1)}" var="i">                                      
+                                                    <h:graphicImage value="img/#{i}.png" />
+                                                </ui:repeat>  
+                                            </span>
+                                            <span><h:outputText value="#{c.comentarioPK.fechaComentario}" >
+                                                    <f:convertDateTime pattern="hh:mm:ss dd/MM/yyyy" /> 
+                                                </h:outputText></span>
+                                            <div>
+                                                <h:outputText value="#{c.comentario}" />
+                                            </div>
+
+                                        </div> 
+                                    </ui:repeat>
+                                </article>
+                            </section>  
+                        </main>
+                    </ui:define>
+                </ui:decorate>
+
+
+            </ui:define>
+        </ui:decorate>
+
+
+
+
+    </h:body>
+
+</html>

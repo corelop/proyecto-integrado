@@ -1,0 +1,505 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=4.0, user-scalable=0" />
+
+        <title>Facelets Template</title>
+
+        <h:outputStylesheet library="css" name="admin.css"/>
+
+        <h:outputScript library="js" name="jquery-3.3.1.min.js" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+        <h:outputScript library="js" name="galeriaImagenes.js" />
+        <h:outputScript library="js" name="jquery.validate.min.js" />
+        <h:outputScript library="js" name="popper.min.js" />
+
+    </h:head>
+
+    <script>
+        $(function () {
+
+            $("#muestraSolicitudes").click(function () {
+
+                $("#solicitudes").slideToggle('slow', function () {
+                    // $("#solicitudes").css('display', 'block');
+                });
+
+            });
+
+            $("#buscar").on("keyup", function () {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("buscar");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("tabla");
+                tr = table.getElementsByTagName("tr");
+                for (var t in tr) {
+                    console.log(tr);
+                    //console.log(selectBusqueda.value);
+                    //  console.log(tr[t].getElementsByTagName("td"));
+                    td = tr[t].getElementsByTagName("td")[selectBusqueda.value];
+                    console.log(td);
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[t].style.display = "";
+                        } else {
+                            tr[t].style.display = "none";
+                        }
+                    }
+                }
+            });
+            $("tr").hover(function () {
+                $(this).find('td>div.dropdown').animate({opacity: "1"}, 100);
+            }, function () {
+                $(this).find('td>div.dropdown').animate({opacity: "0"}, 100);
+            });
+
+            $("input[type=checkbox]").on("change", function () {
+                $("input[type=checkbox]:checked").length == 0 ? $("#accionTotal").animate({opacity: "0"}, 100) : $("#accionTotal").animate({opacity: "1"}, 100);
+            });
+
+            $("thead input").on("change", function () {
+                if ($(this)[0].checked) {
+                    $("tbody input").prop('checked', true);
+                } else {
+                    $("tbody input").prop('checked', false);
+                    $("#accionTotal").animate({opacity: "0"}, 100);
+                }
+            });
+
+            $("#buscar").on("keyup", function () {
+                if (selectBusqueda.value == "todos") {
+                    var value = $(this).val().toLowerCase();
+                    $("#tabla tbody tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                }
+            });
+
+            $("input[value=Borrar]").on("click", function () {
+                $("#exampleModalLabel").text("Seguro que desea eliminar a " + $(this).parent().parent().parent().parent().parent()[0].getElementsByTagName("td")[1].textContent + "?");
+            });
+            $("input[value=Borrarlos]").on("click", function () {
+                $("#exampleModalLabel").text("Seguro que desea eliminarlos ?");
+            });
+
+
+        });
+
+
+    </script>
+
+
+    <h:body>
+
+
+        <ui:decorate template="plantillas/composicion.xhtml">
+
+            <ui:define name="content">
+
+                <ui:decorate template="plantillas/plantilla.xhtml">
+
+                    <ui:define name="content_int">
+
+                        <main class="row justify-content-center mb-5">
+                            <ol class="breadcrumb col-12">
+                                <li class="breadcrumb-item">
+                                    <h:form>
+                                        <h:commandLink action="#{inicioRespaldo.volverInicio()}" >Inicio</h:commandLink> 
+                                    </h:form> 
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Panel Admin</li>
+                            </ol>
+
+                            <section class="row col-12 justify-content-center" >
+
+                                <h1 class="row col-12 justify-content-center">Panel de administrador</h1>
+
+                                <h:panelGroup rendered="#{!empty adminRespaldo.msj}">
+                                    <span class=" col-12 alert-danger p-2 mb-2"><h:outputText value="#{adminRespaldo.msj}" /></span>
+                                </h:panelGroup>
+                                <h:form>
+                                    <div id="mostrarGraficos" class="row col-12 justify-content-center">
+                                        <h:outputLink   value="faces/estadisticas.xhtml" >Mostrar estadísticas </h:outputLink>
+                                    </div>
+                                </h:form> 
+
+
+
+                                <div id="solicitudes-contenedor" class="row col-12 justify-content-center flex-column mt-5">
+                                    <div class="row justify-content-center " id="alerta">
+                                        <span class=""><i><h:outputText value="#{adminRespaldo.nSolicitudes}" /> </i> recetas pendientes</span>
+                                        <button id="muestraSolicitudes">Gestionar</button>
+                                    </div>
+                                    <div id="solicitudes" class="row" >
+                                        <c:forEach items="#{adminRespaldo.solicitudes}" var="solicitud">
+
+
+                                            <div class="solicitud col-12">
+                                                <h:panelGroup rendered="#{!empty solicitud.solicitudIngredientesList}">
+
+
+                                                    <div class="solIngredientes row col-12 flex-lg-row justify-content-around">
+                                                        <h6 class="row col-12 justify-content-center"  >Solicitudes de nuevos ingredientes para esta receta</h6>
+                                                        <c:forEach items="#{solicitud.solicitudIngredientesList}" var="ingrediente"  >
+                                                            <h:form class="">
+                                                                <h:messages />
+                                                                <h:inputHidden value="#{ingrediente.nombre}" />
+                                                                <h:inputHidden value="#{ingrediente.cantidad}" />
+                                                                <h:inputHidden value="#{solicitud.codReceta}" />
+                                                                <h:inputHidden value="#{ingrediente.codSolicitud}" />
+                                                                <div class="formSolicitud row flex-column col-12 ">
+                                                                    <span><h:outputText value="#{ingrediente.nombre} " />  </span>
+                                                                    <p>Cantidad: <h:outputText value="#{ingrediente.cantidad} " /> <h:outputText value="#{ingrediente.nombre} " />  </p>
+                                                                    <p><h:outputText value="#{ingrediente.descripcion}" /> </p>
+                                                                    <div class="inforIng">
+                                                                        <p>Selecciona los alérgenos</p>
+                                                                        <div class="alergenos row">
+                                                                            <h:selectManyCheckbox value="#{adminRespaldo.alergenosSeleccionados}">
+                                                                                <f:selectItems value="#{adminRespaldo.alergenos}" />
+                                                                            </h:selectManyCheckbox>
+                                                                        </div>
+                                                                        <p>Otros datos del ingrediente</p>
+                                                                        <div>
+                                                                            <h:outputLabel value="Calorias: " />
+
+                                                                            <h:inputText  id="cal" value="#{adminRespaldo.cal}">
+
+                                                                                <h:message for="cal"/>
+                                                                            </h:inputText>
+                                                                        </div>
+                                                                    </div>
+                                                                    <h:commandButton actionListener="#{adminRespaldo.aceptarIng}" value="Aceptar" />
+                                                                    <h:commandButton action="#{adminRespaldo.rechazarIng(ingrediente.codSolicitud)}" value="Rechazar" />
+                                                                </div>
+                                                            </h:form>
+                                                        </c:forEach>
+
+                                                    </div>
+
+
+                                                </h:panelGroup>
+                                                <h:form id="formEdit">
+
+                                                    <div>
+                                                        <h:inputText value="#{solicitud.nombre}" styleClass="inputTitulo" id="nombreNuevo">
+                                                        </h:inputText>
+                                                    </div>
+                                                    <div class="textoYfoto">
+
+                                                        <h:inputTextarea  value="#{solicitud.contenido}" styleClass="inputContenido" id="contNuevo">
+
+                                                        </h:inputTextarea>
+                                                        <h:graphicImage value="img/recetas/#{solicitud.foto}" styleClass="img-fluid"/>
+
+                                                    </div>
+                                                    <div class="row justify-content-center" id="cont-ing">
+                                                        <div class="ingredientes col-12 col-md-8">
+                                                            <h6>Ingredientes</h6>
+                                                            <ui:repeat value="#{solicitud.ingredientesRecetaList}" var="ingrediente" >
+                                                                <h:inputHidden value="ing"  />
+                                                                <h:inputHidden value="#{ingrediente.cantidad}"  />
+                                                                <h:inputHidden value="#{ingrediente.unidadMedida}"  />
+                                                                <h:inputHidden value="#{ingrediente.ingrediente1.nombre}"  />
+                                                                <li><h:outputText value="#{ingrediente.cantidad} " /> <h:outputText value="#{ingrediente.unidadMedida} " /> <h:outputText value="#{ingrediente.ingrediente1.nombre}" /></li>
+
+                                                            </ui:repeat>
+                                                        </div>
+
+                                                    </div>
+                                                    <div>
+                                                         <h:inputHidden value="#{solicitud.foto}" />
+                                                        <h:inputHidden  value="#{solicitud.autor.nick}"  id="autor" />
+                                                        <h:inputHidden  value="#{solicitud.fechaInsercion}"  id="fecha" ><f:convertDateTime pattern="dd/MM/yyyy" /></h:inputHidden>
+                                                        <span class="autor">Enviado por <h:outputText value="#{solicitud.autor.nick}" id="nick"/> el <h:outputText value="#{solicitud.fechaInsercion}" > <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText></span>
+
+                                                    </div>
+
+                                                    <div class="nuevosDatos ">
+                                                        <h6>Completa la información: </h6>
+                                                        <div class="tipoPlato">
+                                                            <h:outputLabel value="Tipo de plato: " ></h:outputLabel>
+                                                            <h:selectOneMenu value="#{adminRespaldo.recetaEdit.tipoPlato}" >
+                                                                <f:selectItem itemValue="entrante" itemLabel="Entrante"/>
+                                                                <f:selectItem itemValue="principal" itemLabel="Principal"/>
+                                                                <f:selectItem itemValue="carne" itemLabel="Carne"/>
+                                                                <f:selectItem itemValue="pescado" itemLabel="Pescado"/>
+                                                                <f:selectItem itemValue="postre" itemLabel="Postre"/>                   
+                                                            </h:selectOneMenu> 
+                                                            <div class="dificultad">
+                                                                <h:outputLabel value="Dificultad" /><h:inputText value="#{adminRespaldo.recetaEdit.dificultad}" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="dieta">
+                                                            <h:outputLabel value="Dieta: " ></h:outputLabel>
+                                                            <div class="checkbox">
+                                                                <h:selectManyCheckbox value="#{adminRespaldo.dietas}">
+                                                                    <f:selectItem itemValue="6" itemLabel="General"/>
+                                                                    <f:selectItem itemValue="1" itemLabel="Mediterránea"/>
+                                                                    <f:selectItem itemValue="2" itemLabel="Vegetariana"/>
+                                                                    <f:selectItem itemValue="3" itemLabel="Vegana"/>
+                                                                    <f:selectItem itemValue="4" itemLabel="Sin gluten"/>
+                                                                    <f:selectItem itemValue="5" itemLabel="Paleo"/>
+                                                                </h:selectManyCheckbox>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="botones">
+                                                            <h:commandButton value="Aceptar" styleClass="bAceptar" action="#{adminRespaldo.aceptar(solicitud.codReceta)}"/><h:commandButton value="Rechazar" styleClass="bRechazar" action="#{adminRespaldo.rechazar(solicitud.codReceta)}"/>
+                                                        </div>
+                                                    </div>
+                                                </h:form>
+
+                                            </div>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+
+                                <div id="tablas" class="row col-12 justify-content-center flex-column">
+                                    <h1>Tablas</h1>
+
+
+                                    <div class="container" id="main">
+                                        <!--Navbar -->
+                                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+                                            <div class="navbar-collapse row" id="navbarSupportedContent">
+                                                <ul class="navbar-nav col-sm-2 col-lg-7 col-md-4 col-xl-8">
+                                                    <li class="nav-item active">
+                                                        <a class="nav-link" href="#">Usuarios <span class="sr-only">(current)</span></a>
+                                                    </li>
+                                                    <div class="dropdown" id="accionTotal">
+                                                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Acciones
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal"><input class="btn" name="accion" type="submit" value="Borrarlos" /></a>
+                                                        </div>
+                                                    </div>
+                                                </ul>
+                                                <div class="col-lg-5 col-md-8 col-xl-4 col-sm-10">
+                                                    <form class="form-inline my-2 ">
+                                                        <input id="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search" />
+                                                        <select class="form-inline py-1  mx-2" id="selectBusqueda">
+                                                            <option value="todos" selected="selected">Todos</option>
+                                                            <option value="1">Nick</option>
+                                                            <option value="2">Nombre</option>
+                                                            <option value="3">Apellidos</option>
+                                                            <option value="4">Email</option>
+
+                                                        </select>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </nav>
+                                        <!--/.Navbar -->
+                                        <!-- cuerpo -->
+
+                                        <div id="main">
+                                            <table id="tabla" class="table table-striped bg-secondary">
+                                                <thead>
+                                                    <tr>
+                                                        <th><input type="checkbox" /></th>
+                                                        <th scope="col">Nick</th>
+                                                        <th scope="col">Nombre</th>
+                                                        <th scope="col">Apellidos</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col" colspan="2"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <ui:repeat var="usuario" value="#{adminRespaldo.usuarios}" >
+
+                                                        <h:panelGroup rendered="#{!usuario.admin}">
+                                                            <tr>
+                                                                <h:form>
+                                                                    <input type='hidden' value="${usuario.nick}" name="nick" />
+                                                                    <td><input type="checkbox" /></td>
+
+                                                                    <td>${usuario.nick}</td>
+                                                                    <td>${usuario.nombre}</td>
+                                                                    <td>${usuario.apellidos}</td>
+                                                                    <td>${usuario.correo}</td>
+
+                                                                    <td>
+
+                                                                        <h:commandButton styleClass="btn-light" action="#{adminRespaldo.borrarUsu(usuario.nick)}" value="Borrar" />
+                                                                        <h:commandButton styleClass="btn-light" action="#{adminRespaldo.hacerAdmin(usuario.nick)}" value="Hacer admin" />
+
+
+                                                                    </td>
+                                                                </h:form>
+
+                                                            </tr>
+                                                        </h:panelGroup>
+                                                        <h:panelGroup rendered="#{usuario.admin}">
+                                                            <tr class="admin">
+                                                                <h:form>
+                                                                    <input type='hidden' value="${usuario.nick}" name="nick" />
+                                                                    <td><input type="checkbox" /></td>
+
+                                                                    <td>${usuario.nick}</td>
+                                                                    <td>${usuario.nombre}</td>
+                                                                    <td>${usuario.apellidos}</td>
+                                                                    <td>${usuario.correo}</td>
+
+                                                                    <td>
+                                                                        <h:commandButton styleClass="btn-light" action="#{adminRespaldo.borrarUsu(usuario.nick)}" value="Borrar" />
+                                                                        <h:commandButton styleClass="btn-light" action="#{adminRespaldo.quitarAdmin(usuario.nick)}" value="Quitar admin" />
+
+
+                                                                    </td>
+                                                                </h:form>
+
+                                                            </tr>
+                                                        </h:panelGroup>
+
+
+
+                                                    </ui:repeat>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Seguro que desea eliminar a ?</h5>
+
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                                    <h:form >
+
+                                                                        <input class="btn btn-secondary" name="accion" type="submit" value="Si" />
+                                                                    </h:form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="container" id="main">
+                                        <!--Navbar -->
+                                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+                                            <div class="navbar-collapse row" id="navbarSupportedContent">
+                                                <ul class="navbar-nav col-sm-2 col-lg-7 col-md-4 col-xl-8">
+                                                    <li class="nav-item active">
+                                                        <a class="nav-link" href="#">Recetas <span class="sr-only">(current)</span></a>
+                                                    </li>
+                                                    <div class="dropdown" id="accionTotal">
+                                                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Acciones
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal"><input class="btn" name="accion" type="submit" value="Borrar" /></a>
+                                                        </div>
+                                                    </div>
+                                                </ul>
+                                                <div class="col-lg-5 col-md-8 col-xl-4 col-sm-10">
+                                                    <form class="form-inline my-2 ">
+                                                        <input id="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search" />
+                                                        <select class="form-inline py-1  mx-2" id="selectBusqueda">
+                                                            <option value="todos" selected="selected">Todos</option>
+                                                            <option value="1">Nombre</option>
+                                                            <option value="2">Autor</option>
+                                                            <option value="3">Fecha Subida</option>
+                                                            <option value="4">Tipo</option>
+                                                            <option value="5">Dificultad</option>
+                                                            <option value="6">Valoración</option>
+                                                        </select>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </nav>
+                                        <!--/.Navbar -->
+                                        <!-- cuerpo -->
+
+                                        <div id="main">
+                                            <table id="tabla" class="table table-striped bg-secondary">
+                                                <thead>
+                                                    <tr>
+                                                        <th><input type="checkbox" /></th>
+                                                        <th scope="col">Nombre</th>
+                                                        <th scope="col">Autor</th>
+                                                        <th scope="col">Fecha Subida</th>
+                                                        <th scope="col">Tipo</th>
+                                                        <th scope="col">Dificultad</th>
+                                                        <th scope="col">Valoración</th>
+                                                        <th scope="col" colspan="2"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <ui:repeat var="receta" value="#{adminRespaldo.recetas}" >
+
+                                                        <tr>
+                                                            <h:form>
+                                                                <input type='hidden' value="${receta.codReceta}" name="cod_receta" />
+                                                                <td><input type="checkbox" /></td>
+
+                                                                <td>${receta.nombre}</td>
+                                                                <td>${receta.autor.nick}</td>
+                                                                <td><h:outputText value="#{receta.fechaInsercion}">
+                                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                                    </h:outputText></td>
+                                                                <td>${receta.tipoPlato}</td>
+                                                                <td>${receta.dificultad}</td>
+
+                                                                <td>
+                                                                    <h:commandButton styleClass="btn-light" action="#{adminRespaldo.borrarReceta(receta.codReceta)}" value="Borrar" />
+                                                                </td>
+                                                            </h:form>
+
+                                                        </tr>
+
+                                                    </ui:repeat>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                </div>
+
+
+
+                            </section>
+
+                        </main>
+                    </ui:define>
+                </ui:decorate>
+
+            </ui:define>
+        </ui:decorate>
+
+
+
+    </h:body>
+
+</html>

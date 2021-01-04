@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+             <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=4.0, user-scalable=0" />
+        <title>FoodLab</title>
+
+        <h:outputStylesheet library="css" name="index.css"/>
+
+        <h:outputScript library="js" name="jquery-3.3.1.min.js" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+        <h:outputScript library="js" name="galeriaImagenes.js" />
+        <h:outputScript library="js" name="jquery.validate.min.js" />
+        <h:outputScript library="js" name="popper.min.js" />
+
+
+        <script>
+            $(function () {
+
+                cargarRecetas();
+                $("input[type='radio']").on("click", function () {
+
+                    var tBusqueda = $("input[type='radio']:checked").val();
+                    console.log(tBusqueda);
+                    switch (tBusqueda) {
+                        case 'nombre':
+                            $("#barraBusquedaN").css("display", "inherit");
+                            $("#barraBusquedaD").css("display", "none");
+                            $("#barraBusquedaI").css("display", "none");
+                            break;
+                        case 'ingrediente':
+                            $("#barraBusquedaN").css("display", "none");
+                            $("#barraBusquedaD").css("display", "none");
+                            $("#barraBusquedaI").css("display", "inherit");
+                            break;
+                        case 'dieta':
+                            $("#barraBusquedaN").css("display", "none");
+                            $("#barraBusquedaD").css("display", "inherit");
+                            $("#barraBusquedaI").css("display", "none");
+                            break;
+                    }
+                });
+                function cargarRecetas() {
+
+                    $.ajax({
+                        url: "ultimasRecetas",
+                        dataType: 'JSON',
+                        data: "receta=receta",
+                        method: 'POST',
+                        success: function (result) {
+                            //console.log("success");
+                            var recetas = {};
+                            var imgs = {};
+                            var i = 0;
+                            $.each(result, function (clave, receta) {
+                                imgs[i] = "img/recetas/" + clave;
+                                recetas[i] = receta;
+                                //console.log(clave + "--" + receta);
+                                i++;
+                            });
+                            galeria(imgs, recetas);
+                            //console.log(imgs);
+                            //console.log(recetas);
+                        }
+                    });
+                }
+
+
+                $("#bIngrediente").keyup(function (evento) {
+                    $.ajax({
+                        url: "buscarIngredientes",
+                        data: "ingrediente=" + $(this).val(),
+                        dataType: 'JSON',
+                        success: function (result) {
+                            $("#listaIngredientes").empty();
+                            $.each(result, function (n, f) {
+                                // console.log(n + "--" + f);
+                                $("#listaIngredientes").append("<option>" + n + "</option>");
+                            });
+                        }
+                    }); //ajax
+
+                });
+
+
+
+
+            });
+        </script>
+    </h:head>
+
+
+    <h:body>
+
+
+        <ui:decorate template="plantillas/composicion.xhtml">
+
+            <ui:define name="content">
+
+                <ui:decorate template="plantillas/plantilla.xhtml">
+
+                    <ui:define name="content_int">
+
+
+
+                        <main class="row justify-content-center mb-5">
+
+
+                            <h:panelGroup rendered="#{!inicioRespaldo.pintarRecetas}">
+                                <div id="buscarReceta" class="col-12">
+                                    <div class="row align-content-center" id="cont-barra">
+                                        <div id="barraBusquedaN" class="col-12 col-lg-8 offset-lg-2 row barraBusqueda" >
+                                            <h:form class="row col-12">
+                                                <h:inputText  value="#{inicioRespaldo.nReceta}" id="brn"/>
+                                                <p:watermark for="brn" value="Buscar receta" />
+                                                <h:commandButton action="#{inicioRespaldo.buscaNombre()}" image="img/buscar.png"></h:commandButton>
+                                            </h:form>
+
+                                        </div>
+                                        <div id="barraBusquedaI" class="col-8 offset-2 row barraBusqueda">
+                                            <h:form class="row col-12 justify-content-between">
+                                                <p:chips value="#{inicioRespaldo.ingredientes}" id="ing" />
+                                                <p:watermark for="ing" value="Introducir ingredientes" />
+
+                                                <h:commandButton action="#{inicioRespaldo.buscaIngredientes()}" image="img/buscar.png" id="buscarIng"></h:commandButton>
+                                            </h:form>
+
+
+
+                                        </div>
+                                        <div id="barraBusquedaD" class="col-8 offset-2 row barraBusqueda">
+                                            <h:form class="row col-12 justify-content-between">
+                                                <h:selectOneMenu value="#{inicioRespaldo.dietaSeleccionada}" valueChangeListener="#{inicioRespaldo.cargarDietas}" onchange="submit()">
+                                                    <f:selectItems value="#{inicioRespaldo.dietas}"/>
+                                                </h:selectOneMenu>
+                                                <h:commandButton action="#{inicioRespaldo.buscaDieta()}" image="img/buscar.png"></h:commandButton>
+                                            </h:form>
+                                        </div>
+                                        <div id="radios" class="row col-12 justify-content-center">
+
+                                            <div class="rBusqueda">
+                                                <input type="radio" name="busqueda" value="nombre" id="busqN" checked="checked" />
+                                                <label for="busqN">Por nombre</label>
+                                            </div>
+
+                                            <div class="rBusqueda">
+                                                <input type="radio" name="busqueda" value="ingrediente"  id="busqI" />
+                                                <label for="busqI">Por ingredientes</label>
+                                            </div>
+
+                                            <div class="rBusqueda">
+                                                <input type="radio" name="busqueda" value="dieta" id="busqT" />
+                                                <label for="busqT">Por dieta</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <section class="row col-12 mt-5">
+                                    <h1>Últimas recetas añadidas</h1> 
+                                    <div id="ultimasAdd" class="row justify-content-between">
+                                        <button class="col-1" id="prev"></button>
+                                        <ul id="diapositivas" class="col-10 ">
+                                            <li>
+
+                                                <h:form id="formOculto">
+                                                    <h:inputHidden  id="codRecetaOculto" /> 
+                                                    <h:commandButton value="ver" action="#{inicioRespaldo.asignarCod()}" id="diapo" image="default"/>
+                                                </h:form>
+
+                                                <div id="rotulo"></div>
+
+                                            </li>
+                                        </ul>
+                                        <button class="col-1" id="next"></button>
+                                    </div>
+
+                                </section>
+
+
+                                <section class="row col-12 justify-content-center mt-5">
+                                    <h1>Explorar</h1>	
+                                    <div id="categorias" class="row mb-5">
+                                        <div>
+                                            <h:form>
+                                                <h:inputHidden value="entrante" />
+                                                <h:commandButton action="#{inicioRespaldo.buscaReceta()}" value="Entrantes" />
+                                            </h:form>
+                                        </div>
+                                        <div>
+                                            <h:form>
+                                                <h:inputHidden value="principal" />
+                                                <h:commandButton action="#{inicioRespaldo.buscaReceta()}" value="Principales" />
+                                            </h:form>
+                                        </div>
+                                        <div>
+                                            <h:form>
+                                                <h:inputHidden value="carne" />
+                                                <h:commandButton action="#{inicioRespaldo.buscaReceta()}" value="Carnes" />
+                                            </h:form>
+                                        </div>
+                                        <div>
+                                            <h:form>
+                                                <h:inputHidden value="pescado" />
+                                                <h:commandButton action="#{inicioRespaldo.buscaReceta()}" value="Pescados" />
+                                            </h:form>
+                                        </div>
+                                        <div>
+                                            <h:form>
+                                                <h:inputHidden value="postre" />
+                                                <h:commandButton action="#{inicioRespaldo.buscaReceta()}" value="Postres" />
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </section>
+
+                            </h:panelGroup>  
+
+                            <h:panelGroup rendered="#{inicioRespaldo.pintarRecetas}">
+
+                                <ol class="breadcrumb col-12">
+                                    <li class="breadcrumb-item">
+                                        <h:form>
+                                            <h:commandLink action="#{inicioRespaldo.volverInicio()}" >Inicio</h:commandLink> 
+                                        </h:form> 
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">Resultados</li>
+                                </ol>
+
+
+
+                                <section class="row col-12 justify-content-center g" id="resultadoRecetas">
+
+
+                                    <h:panelGroup rendered="#{empty inicioRespaldo.recetasNombre}">
+                                        <span>No se encontraron resultados.</span>
+                                    </h:panelGroup>
+
+                                    <ui:repeat value="#{inicioRespaldo.recetasNombre}" var="receta">
+
+                                        <div class="card">
+
+                                            <img src="img/recetas/#{receta.foto}" class="card-img-top" />
+                                            <div class="card-body">
+                                                <h5><h:outputText value="#{receta.nombre}"/></h5>
+
+
+                                                <span>
+                                                    <b> Dificultad: </b> <h:outputText value="#{receta.dificultad}"/>
+                                                </span>
+
+
+                                                <h:form id="formOculto">
+                                                    <h:inputHidden value="#{receta.codReceta}" id="codRecetaOculto"/>
+                                                    <h:commandButton action="#{inicioRespaldo.asignarCod()}" value="ver"/>
+                                                </h:form>
+
+                                            </div>
+                                        </div>
+
+
+                                    </ui:repeat>
+                                </section>
+
+
+
+
+                            </h:panelGroup>
+                        </main>
+                    </ui:define>
+                </ui:decorate>
+
+
+            </ui:define>
+        </ui:decorate>
+
+
+
+
+
+    </h:body>
+
+</html>

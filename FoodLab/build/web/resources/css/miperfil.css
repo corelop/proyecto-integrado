@@ -1,0 +1,92 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08-jun-2020, 19:13:31
+    Author     : CRIS
+*/
+
+
+fieldset{
+	background-color: rgba(17,33,45,1.00);
+color: aliceblue;
+	border-radius: 15px;
+}
+
+legend{
+	background-color: rgba(17,33,45,1.00);
+	border-radius: 5px;
+	font-family: 'Boogaloo';
+	padding: 0.1em;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	text-indent: 0.5em;
+	border: 4px solid rgba(249,242,242,1.00);
+		
+}
+
+main form{
+	margin: 1.5em auto;
+	display: block;
+	width: 80%;
+	
+}
+
+#formPerfil div, #formPass div{
+	justify-content: center;
+}
+
+#formPerfil label,#formPerfil input, #formPass label,#formPass input{
+	background-color: rgba(249,247,247,1.00);
+	border: 2px solid #F47993;
+ border-radius: 10px;
+	align-self: center;
+	padding: 0.2em;
+}
+
+#formPerfil label, #formPass label{
+	margin-top: 0.5em;
+	display: block;
+	color: rgba(17,33,45,1.00);
+	font-weight: bold;
+	text-align: right;
+	border-right: 0;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+#formPerfil input, #formPass input{
+	border-left: 0;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	transition: all 0.5s;
+}
+
+#formPerfil input:hover, #formPass input:hover{
+	background-color: rgba(226,217,217,1.00);
+}
+
+
+main input[type="submit"]{
+	background-color:  #F47993;
+	 border-radius: 10px;
+	display: block;
+	margin: 0.5em auto;
+    border: 2px solid  rgba(249,247,247,1.00);
+	width: 70%;
+	padding: 0.3em;
+	font-weight: bold;
+	color: rgba(249,247,247,1.00);
+	font-family: 'Boogaloo';
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	transition: all 0.5s;
+}
+
+main input[type="submit"]:hover{
+	letter-spacing: 5px;
+	cursor: pointer;
+	background-color:  rgba(242,98,129,0.92);
+}

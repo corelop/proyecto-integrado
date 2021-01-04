@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="miperfil.xhtml" x="98" y="151" zoom="true"/>
+        <Node id="index.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="listacompra.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="estadisticas.xhtml" x="288" y="80" zoom="false"/>
+        <Node id="nuevareceta.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="plantillas/cabecera.xhtml" x="1149" y="204" zoom="true"/>
+        <Node id="misrecetas.xhtml" x="900" y="150" zoom="false"/>
+        <Node id="plantillas/footer.xhtml" x="1151" y="352" zoom="true"/>
+        <Node id="paneladmin.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="plantillas/composicion.xhtml" x="1144" y="405" zoom="true"/>
+        <Node id="categorias.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="receta.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="plantillas/plantilla.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="menu.xhtml" x="400" y="150" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

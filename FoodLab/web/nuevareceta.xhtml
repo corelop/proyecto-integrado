@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=4.0, user-scalable=0" />
+        <title>Facelets Template</title>
+
+        <h:outputStylesheet library="css" name="nuevareceta.css"/>
+
+        <h:outputScript library="js" name="jquery-3.3.1.min.js"/>
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+        <h:outputScript library="js" name="galeriaImagenes.js" />
+        <h:outputScript library="js" name="jquery.validate.min.js" />
+        <h:outputScript library="js" name="popper.min.js" />
+
+
+
+        <script>
+
+            window.onload = function () {
+
+
+                $("#nIngrediente").on("click", function (ev) {
+
+                    ev.preventDefault();
+                    var display = $("#infoIng").css("display");
+                    //console.log(display);
+
+                    switch (display) {
+                        case "none":
+                            $("#infoIng").css("display", "block");
+                            $("#nIngrediente").addClass("noBordesRedondos");
+                            break;
+                        case "block":
+                            $("#infoIng").css("display", "none");
+                            $("#nIngrediente").removeClass("noBordesRedondos");
+                            break;
+                    }
+
+                });
+                $("#addIng2").keyup(function () {
+                    // console.log($(this).val());
+                    $.ajax({
+                        url: "buscarIngredientes",
+                        data: "ingrediente=" + $(this).val(),
+                        dataType: 'JSON',
+                        success: function (result) {
+                           // console.log(result);
+                            $("#listaIngredientes").empty();
+                            $.each(result, function (c,n) {
+                                console.log(n);
+                                $("#listaIngredientes").append("<option>" + n + "</option>");
+                            });
+                        }
+                    }); //ajax
+
+                });
+
+                var nIngredientes = 0;
+                $("#addIng").on("click", function (ev) {
+
+                    if ($("#addIng2").val() != "") {
+                    $("#ingredientes").css("display", "block");
+                            ev.preventDefault();
+                            var input = $('<input />');
+                            input.attr('name', 'n1' + nIngredientes);
+                            var input2 = $('<input />');
+                            input2.attr('name', 'n2' + nIngredientes);
+                            var input3 = $('<input type='hidden' />');
+                    input3.attr('name', 'n3' + nIngredientes);
+                    input3.val($("#addIng2").val());
+                    $("#ingredientes").append('<div></div>');
+                    $("#ingredientes div:last-child").append(input);
+                    $("#ingredientes div:last-child").append(input2);
+                    $("#ingredientes div:last-child").append("<span>" + $("#addIng2").val() + "</span>");
+                    $("#ingredientes div:last-child").append(input3);
+                    var boton = $('<button>x</button>');
+                    boton.on("click", function () {
+                        console.log($(this));
+                        console.log($(this).parent());
+                    });
+                    $("#ingredientes div:last-child").append(boton);
+                    nIngredientes++;
+                }
+
+
+                }
+                );
+
+
+                var nSolicitudes = 0;
+                $("#addSol").on("click", function (ev) {
+
+                    if ($("#nIng").val() != "") {
+                    $("#ingredientesS").css("display", "block");
+                            ev.preventDefault();
+                            var input = $('<input type='hidden' />');
+                    input.attr('name', 's' + nSolicitudes);
+                    input.val($("#nIng").val() + "," + $("#cIng").val() + "," + $("#dIng").val());
+                    $("#ingredientesS").append("<div></div>");
+                    $("#ingredientesS  div:last-child").append(input);
+                    $("#ingredientesS  div:last-child").append('<span>' + $("#nIng").val() + '</span>');
+                    $("#ingredientesS  div:last-child").append('<span>' + $("#cIng").val() + '</span>');
+                    $("#ingredientesS  div:last-child").append('<span>' + $("#dIng").val() + '</span>');
+                    var boton = $('<button>x</button>');
+                    boton.on("click", function () {
+                        console.log($(this));
+                        console.log($(this).parent());
+                    });
+                    $("#ingredientesS  div:last-child").append(boton);
+                    nSolicitudes++;
+                }
+
+
+                }
+                );
+
+
+                $("button.eliminar").on("click", function () {
+                    ev = ev || window.event;
+                    ev.preventDefault();
+                    console.log($(this));
+                    console.log($(this).parent());
+                    //$(this).parent();
+                });
+
+            };
+
+
+
+
+        </script>
+
+    </h:head>
+
+
+    <body>
+
+
+
+        <ui:decorate template="plantillas/composicion.xhtml">
+
+            <ui:define name="content">
+
+                <ui:decorate template="plantillas/plantilla.xhtml">
+
+                    <ui:define name="content_int">
+
+
+                        <main class="row justify-content-center mb-5">
+
+
+                            <ol class="breadcrumb col-12">
+                                <li class="breadcrumb-item">
+                                    <h:form>
+                                        <h:outputLink   value="faces/misrecetas.xhtml" >Mis recetas</h:outputLink>
+                                    </h:form> 
+                                    <a href="#"></a></li>
+                                <li class="breadcrumb-item"><a href="#">Alta de recetas</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Nueva receta</li>
+                            </ol>
+
+
+                            <h1>Nueva receta</h1>
+
+                            <span class="row col-12 justify-content-center"> <h:outputText value="#{misRecetasRespaldo.msj}" class="alert-info" />
+                            </span>
+                            <h:form enctype="multipart/form-data" class="row col-12 justify-content-center" id="formNuevaReceta" role="form">
+                                <section class="row">
+
+                                    <div class="row col-12">
+                                        <h:outputLabel class="col-4 col-md-3" value="Nombre:" />
+                                        <h:inputText class="col-8 col-md-7" id="nombre" />
+                                    </div>
+                                    <div class="row col-12">
+                                        <h:outputLabel class="col-4 col-md-3" value="Preparación: " />
+                                        <h:inputTextarea class="col-8 col-md-7 " rows="10" id="preparacion" />
+                                    </div>
+                                    <div class="row col-12"  id="bIngrediente">
+                                        <h:outputLabel class="col-4 col-md-3" value="Añadir ingredientes: " />
+                                        <input type="text" class="col-8 col-md-7" list="listaIngredientes" id="addIng2"/>
+                                        <datalist id="listaIngredientes"></datalist>
+                                        <button id="addIng">+</button>
+
+                                    </div>
+
+                                    <div class="row col-12" id="ingredientes">
+
+                                        <div><span>Cantidad</span><span>Unidad</span><span>Ingrediente</span></div>
+
+
+                                    </div>
+
+                                    <div class="row col-12">
+                                        <button id="nIngrediente">Nuevo ingrediente</button>
+                                    </div>
+                                    <div class="row flex-column col-12" id="infoIng">
+                                        <h:outputLabel value="Nombre: "><input id="nIng" /> </h:outputLabel>
+                                        <h:outputLabel value="Cantidad: "><input id="cIng" /></h:outputLabel>
+                                        <h:outputLabel value="Descripción del alimento: "><textarea id="dIng" /></h:outputLabel>
+                                        <h:outputLabel value=" "><button id="addSol">+</button></h:outputLabel>
+                                    </div>
+
+                                    <div class="row col-12" id="ingredientesS">
+
+                                        <div><span>Cantidad</span><span>Ingrediente</span><span>Descripcion</span></div>
+
+
+                                    </div>
+
+                                    <div class="row col-12 mt-5">
+                                        <h:outputLabel class="col-4 col-md-3" value="Imagen: " /> <h:inputFile value="#{misRecetasRespaldo.imgReceta}"  id="img"/>  
+                                    </div>
+                                    <div class="row col-12">
+                                        <h:commandButton value="Enviar solicitud" id="addReceta" action="#{misRecetasRespaldo.addReceta()}"/>
+                                    </div>
+                                </section>
+                            </h:form>
+                        </main>
+
+                    </ui:define>
+                </ui:decorate>
+
+
+            </ui:define>
+        </ui:decorate>
+
+
+
+    </body>
+
+</html>

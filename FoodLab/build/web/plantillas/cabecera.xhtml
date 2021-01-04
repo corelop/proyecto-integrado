@@ -1,0 +1,264 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <h:outputStylesheet name="./css/bootstrap.min.css"/>
+        <h:outputStylesheet name="./css/plantilla.css"/>
+
+        <script>
+
+            $('#modalSesion').on('shown.bs.modal', function () {
+                $('#bInicioSesion').trigger('focus');
+            });
+
+
+            $(document).ready(function () {
+
+
+                $('[data-toggle="tooltip"]').tooltip();
+
+                $('#bRegistro').click(function (e) {
+                    e.preventDefault();
+                    //console.log("click");
+
+                    $('#modalSesion')
+                            .modal('hide')
+                            .on('hidden.bs.modal', function (e) {
+                                $('#bRegistro').modal('show');
+                                //console.log("mostrar");
+
+                                $(this).off('hidden.bs.modal'); // Remove the 'on' event binding
+                            });
+
+                });
+
+                var show = 0;
+                $('body').on('click', '.perfil', function () {
+                    if (show == 0) {
+                        $('.menuDesplegable ul').animate({
+                            'opacity': 1
+                        }, 600);
+                        $('.menuDesplegable ul').animate({
+                            'margin-top': '20px'
+                        }, {
+                            duration: 800,
+                            queue: false
+                        });
+                        show = 1;
+                    } else {
+                        $('.menuDesplegable ul').animate({
+                            'opacity': 0
+                        }, 600);
+                        $('.menuDesplegable ul').animate({
+                            'margin-top': '0'
+                        }, {
+                            duration: 800,
+                            queue: false
+                        });
+                        show = 0;
+                    }
+                });
+
+                $(window).on('resize', function () {
+                    var w = $(this);
+                    if (w.width() >= 650) {
+
+                        $("figure input[type='image']").attr("src", "img/Logo.png");
+                    } else {
+
+                        $("figure input[type='image']").attr("src", "img/LogoS.png");
+                    }
+                });
+
+            });
+
+        </script>
+
+    </h:head>
+
+    <h:body>
+
+
+        <ui:insert name="top">
+
+            <header class="row justify-content-between">
+
+                <figure class="col-5 col-md-3 col-lg-2">
+
+                    <h:form>
+                        <h:commandButton action="#{inicioRespaldo.volverInicio()}" alt="FoodLab" styleClass="img-fluid" id="logo" image="img/Logo.png">
+                        </h:commandButton>
+                    </h:form> 
+                    <figcaption>Come, disfruta y saborea</figcaption>
+                </figure>
+
+
+                <h:panelGroup rendered="#{!empty loginRespaldo.descripcion}">
+                    <div id="descripcion" class="align-self-center" >
+                        <span><h:outputText value="#{loginRespaldo.descripcion}" /></span>
+                    </div>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{!loginRespaldo.logueoOK}">
+                    <div id="inicioSesion" class="col-7 col-md-4 col-lg-3 mt-3" >
+                        <button data-toggle="modal" data-target="#modalSesion" id="bInicioSesion">Iniciar sesión</button>
+                    </div>
+                </h:panelGroup>
+
+                <div class="modal fade" id="modalSesion" tabindex="-1" role="dialog" aria-labelledby="tituloInicio" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="tituloInicio">Iniciar sesión</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!-- formulario de inicio de sesion -->
+                            <h:form id="login-form" styleClass="form">
+
+                                <div class="modal-body">
+                                    <div class="row m-2 mt-5">
+                                        <label  class="labelInicio col-11 ">Nick:
+                                            <h:inputText value="#{loginRespaldo.usuario}" styleClass="inputInicio col-8" id="loginNick" /></label>
+                                            
+                                    </div>
+                                    <div class="row m-2">
+                                        <label class="labelInicio col-11">Contraseña:
+                                            <h:inputSecret value="#{loginRespaldo.pass}" styleClass="inputInicio col-8" id="loginPass" /></label>
+                                    </div>
+
+
+                                    <div id="register-link" class="row m-3 mt-5 ">
+                                        <p class="offset-2 offset-md-5 offset-lg-7">¿Aún no tienes cuenta? </p>
+                                        <button  id="bRegistro" data-toggle="modal" data-target="#modalRegistro" >Regístrate</button>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button"  data-dismiss="modal">Cancelar</button>
+                                    <h:commandButton value="Entrar" action="#{loginRespaldo.comprobarDatos()}"/>
+                                </div>
+
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="tituloRegistro" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="tituloRegistro">Registrarse</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!-- formulario de registro -->
+                            <h:form id="register-form" styleClass="form">
+                                <div class="modal-body">
+
+                                    <div class="row m-2 mt-5">
+                                        <h:outputLabel for="nickR" styleClass="labelInicio col-4 col-md-2 offset-md-1" value="Nick:" />
+                                        <h:inputText value="#{loginRespaldo.usuR.nick}" label="nickR" styleClass="inputInicio col-8" id="nickR" />
+                                    </div>
+                                    <div class="row m-2">
+                                        <h:outputLabel for="passR" styleClass="labelInicio col-4 col-md-2 offset-md-1" value="Contraseña:" />
+                                        <h:inputSecret value="#{loginRespaldo.usuR.password}" label="passR" styleClass="inputInicio col-8" id="passR" />
+                                    </div>
+                                    <div class="row m-2">
+
+                                        <label for="passwordConf" class="labelInicio col-4 col-md-3 ">Confirmar contraseña:</label><br />
+                                        <input type="password" name="passwordConf" id="passwordConf" class="inputInicio col-8" />
+                                    </div>
+                                    <div class="row m-2">
+                                        <h:outputLabel for="nombre" styleClass="labelInicio col-4 col-md-2 offset-md-1" value="Nombre:" />
+                                        <h:inputText value="#{loginRespaldo.usuR.nombre}" label="nombre" styleClass="inputInicio col-8" id="nombre" />
+                                    </div>
+                                    <div class="row m-2">
+                                        <h:outputLabel for="apellidos" styleClass="labelInicio col-4 col-md-2 offset-md-1" value="Apellidos:" />
+                                        <h:inputText value="#{loginRespaldo.usuR.apellidos}" label="apellidos" styleClass="inputInicio col-8" id="apellidos" />
+                                    </div>
+                                    <div class="row m-2 mb-5">
+                                        <h:outputLabel for="emailR" styleClass="labelInicio col-4 col-md-2 offset-md-1" value="Email:" />
+                                        <h:inputText value="#{loginRespaldo.usuR.correo}" label="emailR" styleClass="inputInicio col-8" id="emailR" />   
+                                    </div>
+
+                                    <div class="row m-2 mb-5">
+                                        <label for="terminos" class="labelInicio col-8 offset-2">Acepto los términos y condiciones: </label><br />
+                                        <input type="checkbox" name="terminos" id="terminos" class="col-1" />
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button"  data-dismiss="modal">Cancelar</button>          
+                                    <h:commandButton value="Entrar" action="#{loginRespaldo.registro()}"/>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+
+                <h:panelGroup rendered="#{loginRespaldo.logueoOK}" id="inicioSesion" styleClass="col-7 col-md-4 col-lg-3 mt-3">
+
+                    <div class="menuDesplegable ">
+                        <button  id="miCuenta" class="perfil " type="button"> Mi cuenta - <h:outputText value="#{loginRespaldo.usuarioLogueado.nick}" /></button>
+                        <ul>
+                            <li> <h:outputLink value="faces/miperfil.xhtml">Mi perfil</h:outputLink></li> 
+                            <h:panelGroup rendered="#{loginRespaldo.usuarioLogueado.admin}" >
+                                <li>  <h:outputLink value="faces/paneladmin.xhtml">Panel admin</h:outputLink></li> 
+                            </h:panelGroup>
+                            <li>
+                                <h:form>
+                                    <h:commandLink action="#{loginRespaldo.logout()}" value="Cerrar sesión" />
+                                </h:form>
+                            </li> 
+                        </ul>
+                    </div>
+
+
+                </h:panelGroup>
+
+
+
+
+            </header>
+
+            <h:form>
+                <nav class="row justify-content-center navbar navbar-expand-md navbar-dark" id="menuNav" role="nav">
+                    <button class="navbar-toggler  justify-content-center" type="button" data-toggle="collapse" data-target="#menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center row " id="menu">
+
+                        <h:commandLink action="#{inicioRespaldo.volverInicio()}" >Inicio</h:commandLink> 
+
+                        <h:outputLink value="faces/categorias.xhtml" styleClass="nav-item">Categorías</h:outputLink>
+                        <h:panelGroup rendered="#{!empty loginRespaldo.usuarioLogueado}">
+                            <h:outputLink value="faces/misrecetas.xhtml" styleClass="nav-item">Mis recetas</h:outputLink>
+                            <h:outputLink value="faces/listacompra.xhtml" styleClass="nav-item" >Lista de la compra</h:outputLink>
+                             <h:panelGroup rendered="#{loginRespaldo.usuarioLogueado.admin}">
+                               <h:outputLink value="faces/paneladmin.xhtml" styleClass="nav-item">Panel Admin</h:outputLink>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{empty loginRespaldo.usuarioLogueado}">
+                            <a class="disabled" disabled="disabled" data-toggle="tooltip" data-placement="top" title="Inicia sesión para acceder" styleClass="nav-item">Mis recetas</a>
+                            <a class="disabled" disabled="disabled" data-toggle="tooltip" data-placement="top" title="Inicia sesión para acceder" styleClass="nav-item">Lista de la compra</a>
+                           
+                        </h:panelGroup>
+                    </div>
+                </nav>
+            </h:form>
+
+        </ui:insert>
+
+
+    </h:body>
+
+</html>

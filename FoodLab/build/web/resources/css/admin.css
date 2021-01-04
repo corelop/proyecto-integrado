@@ -1,0 +1,430 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27-may-2020, 10:01:52
+    Author     : CRIS
+*/
+
+
+  nav#menuNav a:nth-of-type(5){
+                background-color: #CEF599;
+                color: white;
+            }
+
+section{
+	
+}
+
+
+#arreglar{
+	position: relative;
+	width: 7em;
+}
+#arreglar form{
+	top: 0;
+	position: absolute;
+	left: 1.5em;
+	width: 100%;
+}
+
+#solicitudes{
+	display: none;
+	overflow: auto;
+}
+
+#solicitudes-contenedor{
+	color: white;
+	background-color: rgba(17,33,45,1.00);
+	padding: 1em;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+
+}
+
+#alerta{
+	border-bottom: 5px solid rgba(244,121,147,0.46);
+	padding: 0.5em;
+}
+
+#alerta span{
+	font-size: 1.3em;
+	font-weight: bold;
+    font-family: 'Boogaloo';
+	letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+#alerta span i{
+	background-color: rgba(244,121,147,1);
+	margin-right: 0.2em;
+	border-radius: 100%;
+	padding-left: 0.2em;
+	font-size: 1.4em;
+}
+
+#alerta button{
+	margin-left: 1.2em;
+	border-radius: 30px;
+	font-family: 'Boogaloo';
+	font-size: 1.1em;
+	padding: 0.1em 1em;
+	letter-spacing: 3px;
+	color: rgba(249,247,247,1.00);
+	background-color: rgba(244,121,147,1);
+	transition: all 0.5s;
+	border-color: rgba(48,36,36,1.00);
+}
+
+#alerta button:hover{
+	background-color: rgba(241,96,127,1.00);
+	border-color: rgba(249,247,247,1.00);
+	text-shadow: 0px 0px 5px rgba(48,36,36,1.00);
+}
+
+.solicitud{
+	border: 5px solid rgba(244,121,147,0.46);
+	padding: 0.5em ;
+	margin: 5em auto;
+}
+
+.solicitud:first-child{
+	margin-top: 0;
+}
+
+.inputTitulo{
+	width: 100%;
+	text-align: center;
+	background-color: rgba(21,41,55,1.00);
+	border: 2px solid rgba(249,247,247,0.8);
+	border-radius: 10px;
+	color: rgba(249,247,247,1.00);
+	font-size: 1.2em;
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+
+.inputContenido{
+
+	margin-top: 0.5em;
+	background-color: rgba(24,48,65,1.00);
+	border: 1px solid rgba(87,87,87,1.00);
+	border-radius: 10px;
+	color: rgba(249,247,247,1.00);
+	padding: 0.5em;
+	resize: none;
+}
+
+.solicitud .autor{
+	text-shadow: 0px 0px 15px rgba(249,247,247,0.8);
+    font-style: italic;
+	font-size: 0.9em;
+	margin: 0.5em auto 2em;
+	display: block;
+	text-align: center;
+}
+
+.solicitud .autor:hover{
+	cursor: default;
+}
+
+
+.textoYfoto {
+	display: flex;
+}
+
+.solicitud .textoYfoto textarea{
+	width: 60%;
+}
+.solicitud .textoYfoto img{
+	width: 40%;
+}
+
+.nuevosDatos{
+	background-color: rgba(244,121,147,0.2);
+	padding: 1em 4.5em;
+	border-radius: 20px;
+}
+
+main h6{
+	text-transform: uppercase;
+	font-size: 1.2em;
+}
+
+.nuevosDatos h6{
+	text-shadow: 2px 2px 1px rgba(100,8,27,1.00);
+	
+	color: rgba(248,181,195,1.00);
+	
+}
+
+.nuevosDatos .tipoPlato{
+	margin-top: 2em;
+}
+
+.nuevosDatos select{
+	margin-left: 0.5em;
+	padding: 0.2em;
+	width: 50%;
+	border-radius: 5px;
+}
+
+.nuevosDatos option{
+	padding: 0.5em  !important; 
+}
+
+.nuevosDatos option:hover{
+	background-color:  rgba(248,181,195,1.00) !important;
+}
+
+.dificultad input{
+	padding: 0.2em;
+	width: 50%;
+	border-radius: 5px;
+	margin-left: 2.4em;
+	border: 0;
+}
+
+.checkbox label{
+	margin: 0 1em 0 0.2em;
+}
+
+.botones{
+	margin-top: 1.2em;
+}
+
+
+.botones input{
+	padding: 0.5em 1.2em;
+	border-radius: 5px;
+	float: right;
+	margin-top: 1.5em;
+	width: 20%;
+	color: rgba(249,247,247,1.00);
+	transition: all 0.5s;
+}
+
+.botones input:hover{
+	cursor: pointer;
+	filter: saturate(10);
+}
+
+.botones input:first-child{
+	background-color: rgba(55,74,56,1.00);
+}
+
+.botones input:last-child{
+	background-color: rgba(62,55,55,1.00);
+}
+
+#tablas, #graficos{
+	
+	background-color: rgba(17,33,45,1.00);
+	padding: 4em 1em 1em;
+}
+
+#graficos form{
+	background-color:rgba(213,247,167,1.00);
+	padding: 0.5em;
+	border-radius: 5px;
+}
+
+#cont-ing{
+	padding: 1em;
+	box-sizing: border-box;
+}
+
+.ingredientes, .solIngredientes{
+	padding: 1em;
+	border: 1px solid rgba(248,181,195,1.00);
+	border-radius: 5px;
+	
+}
+
+.ingredientes h6, .solIngredientes h6{
+	text-shadow: 2px 2px 1px rgba(248,181,195,1.00);
+	text-decoration: underline;
+
+}
+
+#mostrarGraficos a{
+	text-align: center;
+	padding: 1em 1em 1em;
+	background-color: rgba(17,33,45,1.00);
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	margin-bottom: -3em;
+	color: rgba(249,247,247,1.00);
+	transition: all 0.5s;
+	border-bottom: 4px solid rgba(121,74,91,1.00);
+}
+
+#mostrarGraficos a:hover{
+	background-color: rgba(10,31,46,1.00);
+}
+
+
+
+.solIngredientes label{
+	margin-right: 1em;
+	margin-left: 0.2em;
+	
+}
+
+.alergenos tr{
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 1em 1em;
+}
+
+.formSolicitud{
+	border: 2px solid rgba(243,227,227,1.00);
+	border-right: 0;
+	border-left: 0;
+	padding-bottom: 1em;
+}
+
+.solIngredientes span{
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: rgba(255,240,241,1.00);
+	padding: 0.2em 1em;
+	border-radius: 5px;
+	align-self: center;
+	color: rgba(17,33,45,1.00);
+
+}
+
+.solIngredientes p{
+	font-weight: bold;
+	color:  rgba(248,181,195,1.00);
+}
+
+.alergenos tr td{
+	width: 10%;
+	
+}
+
+.alergenos label{
+	color: transparent;
+	position: relative;
+	display: block !important;
+}
+
+
+.alergenos label:before{
+	content: "";
+	background: url(../../img/iconos_alerg/pescado.png)  no-repeat center;
+	background-size: cover;
+	padding: 1em 0.9em;
+    border-radius: 100%;
+	border: 3px solid rgba(229,229,227,1.00);
+	transition: all 0.8s;
+	position: absolute;
+	
+}
+
+.alergenos td:nth-child(2) label:before{
+	background-image: url(../../img/iconos_alerg/frutos-secos.png);
+}
+.alergenos td:nth-child(3) label:before{
+	background-image: url(../../img/iconos_alerg/lacteos.png);
+}
+.alergenos td:nth-child(4) label:before{
+	background-image: url(../../img/iconos_alerg/moluscos.png);
+}
+.alergenos td:nth-child(5) label:before{
+	background-image: url(../../img/iconos_alerg/gluten.png);
+}
+.alergenos td:nth-child(6) label:before{
+	background-image: url(../../img/iconos_alerg/crustaceos.png);
+}
+.alergenos td:nth-child(7) label:before{
+	background-image: url(../../img/iconos_alerg/huevo.png);
+}
+.alergenos td:nth-child(8) label:before{
+	background-image: url(../../img/iconos_alerg/cacahuete.png);
+}
+.alergenos td:nth-child(9) label:before{
+	background-image: url(../../img/iconos_alerg/soja.png);
+}
+.alergenos td:nth-child(10) label:before{
+	background-image: url(../../img/iconos_alerg/apio.png);
+}
+.alergenos td:nth-child(11) label:before{
+	background-image: url(../../img/iconos_alerg/mostaza.png);
+}
+.alergenos td:nth-child(12) label:before{
+	background-image: url(../../img/iconos_alerg/sesamo.png);
+}
+.alergenos td:nth-child(13) label:before{
+	background-image: url(../../img/iconos_alerg/sulfitos.png);
+}
+
+.alergenos input[type="checkbox"]{
+	display: none;
+}
+.alergenos input:checked + label:before{
+	border: 3px solid rgba(191,243,120,1.00);
+}
+
+.alergenos input + label:hover:before{
+	cursor: pointer;
+	border: 3px solid rgba(235,239,115,1.00);
+}
+
+.alergenos input:hover + label{
+	
+}
+
+.admin{
+	background-color: rgba(219,248,179,1.00) !important;
+	color: rgba(62,59,59,1.00);
+
+}
+
+.solIngredientes input[type="submit"]:hover{
+	cursor:pointer;
+	letter-spacing: 2px;
+	
+}
+
+.solIngredientes input[type="submit"]{
+	background-color: rgba(37,69,35,1.00);
+	color:aliceblue;
+	text-transform: uppercase;
+	border:0;
+	border-radius: 5px;
+	transition: all 0.5s;
+}
+
+.solIngredientes input[type="submit"]:last-of-type{
+	background-color: rgba(69,35,35,1.00);
+}
+
+
+
+
+@media only screen and (max-width:500px){
+	
+	.textoYfoto {
+	flex-flow: column;
+	align-items: center;
+}
+	
+	.textoYfoto textarea{
+		height: 30vh;
+	}
+	
+	
+	.ingredientes, .solIngredientes{
+		width: 100%;
+	}
+	
+	.alergenos tr td{
+		width: 20%;
+	}
+	
+}

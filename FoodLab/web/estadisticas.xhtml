@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=4.0, user-scalable=0" />
+
+        <title>Facelets Template</title>
+
+        <h:outputStylesheet library="css" name="admin.css"/>
+
+        <h:outputScript library="js" name="jquery-3.3.1.min.js" target="head" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+        <h:outputScript library="js" name="galeriaImagenes.js" />
+        <h:outputScript library="js" name="jquery.validate.min.js" />
+        <h:outputScript library="js" name="popper.min.js" />
+
+
+
+
+    </h:head>
+
+    <script>
+        $(function () {
+
+        });
+
+
+    </script>
+
+
+    <h:body>
+
+
+        <ui:decorate template="plantillas/composicion.xhtml">
+
+            <ui:define name="content">
+
+                <ui:decorate template="plantillas/plantilla.xhtml">
+
+                    <ui:define name="content_int">
+
+                        <main class="row justify-content-center mb-5">
+                            <ol class="breadcrumb col-12">
+                                <li class="breadcrumb-item">
+                                    <h:form>
+                                        <h:commandLink action="#{inicioRespaldo.volverInicio()}" >Inicio</h:commandLink> 
+                                    </h:form> 
+                                </li>
+                                    <li class="breadcrumb-item" id="arreglar">
+                                    <h:form>
+                                    
+                                        <h:outputLink  value="faces/paneladmin.xhtml" >Panel Admin</h:outputLink> 
+                                    </h:form> 
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Estadísticas</li>
+                            </ol>
+
+                            <section class="row col-12 justify-content-center" >
+          
+                                <div id="graficos" class="row col-12 justify-content-center flex-column">
+                                    <h1>Estadísticas</h1>
+
+                                    <h:form>
+                                        <p:chart type="bar" model="#{adminRespaldo.estadisticasTipo}" responsive="true" />
+                                        <p:chart type="pie" model="#{adminRespaldo.estadisticasAutor}" responsive="true" />
+                                        <p:chart type="line" model="#{adminRespaldo.estadisticasMes}" responsive="true" />
+                                    </h:form>
+
+
+
+                                </div>
+
+                            </section>
+
+                        </main>
+                    </ui:define>
+                </ui:decorate>
+
+            </ui:define>
+        </ui:decorate>
+
+
+
+    </h:body>
+
+</html>

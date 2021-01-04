@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+             <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=4.0, user-scalable=0" />
+        <title>Facelets Template</title>
+
+        <h:outputStylesheet library="css" name="categorias.css"/>
+
+        <h:outputScript library="js" name="jquery-3.3.1.min.js" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+        <h:outputScript library="js" name="galeriaImagenes.js" />
+        <h:outputScript library="js" name="jquery.validate.min.js" />
+        <h:outputScript library="js" name="popper.min.js" />
+
+
+    </h:head>
+
+
+    <body>
+
+
+
+        <ui:decorate template="plantillas/composicion.xhtml">
+
+            <ui:define name="content">
+
+                <ui:decorate template="plantillas/plantilla.xhtml">
+
+                    <ui:define name="content_int">
+
+
+                        <main class="row justify-content-center mb-5">
+
+                            <section class="row col-12 justify-content-center mb-5">
+                                <h1>Explorar</h1>
+                                <div class="row justify-content-around" id="categorias">
+                                    <div>Todas las recetas
+                                        <h:form >
+                                            <h:inputHidden value=" " />
+                                            <h:commandButton action="#{inicioRespaldo.buscaNombre()}" value="Ver" />
+                                        </h:form>
+
+                                    </div>
+                                    <div>Entrantes   
+                                        <h:form>
+                                            <h:inputHidden value="entrante" />
+                                            <h:commandButton action="#{inicioRespaldo.buscaReceta()}" value="Ver" />
+                                        </h:form>
+                                    </div>
+                                    <div>Principales  
+                                        <h:form>
+                                            <h:inputHidden value="principal" />
+                                            <h:commandButton action="#{inicioRespaldo.buscaReceta()}" value="Ver" />
+                                        </h:form>
+                                    </div>
+                                    <div>Carnes   
+                                        <h:form>
+                                            <h:inputHidden value="carne" />
+                                            <h:commandButton action="#{inicioRespaldo.buscaReceta()}" value="Ver" />
+                                        </h:form>
+                                    </div>
+                                    <div>Pescados   
+                                        <h:form>
+                                            <h:inputHidden value="pescado" />
+                                            <h:commandButton action="#{inicioRespaldo.buscaReceta()}" value="Ver" />
+                                        </h:form>
+                                    </div>
+                                    <div>Postres  
+                                        <h:form>
+                                            <h:inputHidden value="postre" />
+                                            <h:commandButton action="#{inicioRespaldo.buscaReceta()}" value="Ver" />
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="row col-12 justify-content-center">
+                                <h1>Dietas</h1>
+                                <div class="row" id="dietas">
+                                    <div class="card" id="general">
+                                        <div class="card-title">General</div>
+                                        <div class="card-body">Incluye todas las recetas</div>
+                                         <h:form>
+                                            <h:inputHidden value="General" />
+                                            <h:commandButton action="#{inicioRespaldo.buscaReceta2()}" value="Ver" styleClass="card-link"/>
+                                        </h:form>
+                                     
+                                    </div>
+                                    <div class="card"  id="mediterranea">
+                                        <div class="card-title">Mediterránea</div>
+                                        <div class="card-body">La dieta mediterránea es un tipo de alimentación basado en la cocina tradicional de los países ribereños del mar Mediterráneo. Aunque no existe una definición única de la dieta mediterránea, normalmente es rica en vegetales, frutas, granos enteros, frijoles, frutos secos y semillas, y aceite de oliva</div>
+                                         <h:form>
+                                            <h:inputHidden value="Mediterránea" />
+                                            <h:commandButton action="#{inicioRespaldo.buscaReceta2()}" value="Ver" styleClass="card-link"/>
+                                        </h:form>
+                                     
+                                    </div>
+                                    <div class="card"  id="vegetariana">
+                                        <div class="card-title">Vegetariana</div>
+                                        <div class="card-body">Las dietas vegetarianas excluyen la carne de vaca, de pollo y de pescado y los huevos, así como los alimentos que contienen estos productos. Se incluyen los productos lácteos, como la leche, el queso, el yogur y la mantequilla.</div>
+                                          <h:form>
+                                            <h:inputHidden value="Vegetariana" />
+                                            <h:commandButton action="#{inicioRespaldo.buscaReceta2()}" value="Ver" styleClass="card-link"/>
+                                        </h:form>
+                                     
+                                    </div>
+                                    <div class="card"  id="vegana">
+                                        <div class="card-title">Vegana</div>
+                                        <div class="card-body">Una dieta vegana es la que no incluye productos de origen animal como carne, pescado, leche, queso, huevos y miel.</div>
+                                          <h:form>
+                                            <h:inputHidden value="Vegana" />
+                                            <h:commandButton action="#{inicioRespaldo.buscaReceta2()}" value="Ver" styleClass="card-link"/>
+                                        </h:form>
+                                     
+                                    </div>
+                                    <div class="card"  id="sinGluten">
+                                        <div class="card-title">Sin Gluten</div>
+                                        <div class="card-body">La dieta sin gluten consiste en un régimen alimentario en el que se evita el gluten, proteína presente en el trigo, avena, cebada y centeno y que también puede encontrarse en otros productos como medicinas, vitaminas o suplementos.</div>
+                                          <h:form>
+                                            <h:inputHidden value="Sin Gluten" />
+                                            <h:commandButton action="#{inicioRespaldo.buscaReceta2()}" value="Ver" styleClass="card-link"/>
+                                        </h:form>
+                                     
+                                    </div>
+                                    <div class="card"  id="paleo">
+                                        <div class="card-title">Paleo</div>
+                                        <div class="card-body">La dieta paleo se basa en que estamos genéticamente adaptados para comer lo que comían nuestros antepasados del Paleolítico: carne, verduras, pescado, frutas…, y es mejor evitar lácteos, legumbres y cereales. </div>
+                                         <h:form>
+                                            <h:inputHidden value="Paleo" />
+                                            <h:commandButton action="#{inicioRespaldo.buscaReceta2()}" value="Ver" styleClass="card-link"/>
+                                        </h:form>
+                                     
+                                    </div>
+                                </div>
+                            </section>
+
+
+
+
+
+                        </main>
+                    </ui:define>
+                </ui:decorate>
+
+
+            </ui:define>
+        </ui:decorate>
+
+
+
+
+
+    </body>
+
+</html>
